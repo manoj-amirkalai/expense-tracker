@@ -1,3 +1,66 @@
-.page{
-    height: max-content;
+.page {
+  height: max-content;
+}
+.dashboard {
+  height: 88vh;
+  width: 81vw;
+  margin: 10px auto;
+  background-color: var(--bg-nav);
+  backdrop-filter: blur(5px);
+  display: grid;
+  grid-template-columns: 80% 20%;
+  border-radius: 20px;
+}
+.dashboard_chart {
+  border-radius: 20px 0 0 20px;
+  width: 100%;
+  height: 100%;
+}
+.dashboard_expinc {
+  border-radius: 0 20px 20px 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.dashboard_expense {
+  background-color: #da5552;
+  border-radius: 20px;
+  width: 90%;
+  height: 20%;
+}
+.dashboard_income {
+  background-color: #37a572;
+  border-radius: 20px;
+  width: 90%;
+  height: 20%;
+}
+.dashboard_balance {
+  background-color: #1976d2;
+  border-radius: 20px;
+  width: 90%;
+  height: 20%;
+}
+.dashboard_balance,
+.dashboard_expense,
+.dashboard_income {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.dashboard_balance span:first-child,
+.dashboard_expense span:first-child,
+.dashboard_income span:first-child {
+  font-size: 30px;
+}
+.dashboard_balance,
+.dashboard_expense,
+.dashboard_income {
+  font-size: 50px;
 }
