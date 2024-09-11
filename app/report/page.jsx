@@ -13,9 +13,7 @@ import { LuEye } from "react-icons/lu";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { useState } from "react";
-// import { data } from "./makeData"; // Ensure the data is imported correctly
 
-// Create column helper without type argument
 
 const Page = () => {
   const [data, setData] = useState([...transactions]);

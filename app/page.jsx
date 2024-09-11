@@ -10,9 +10,6 @@ import { Input } from "antd";
 const { Search } = Input;
 
 export default function Home() {
-  // console.log("height:", window.innerHeight);
-  // console.log("width:", window.innerWidth);
-  const [getyear, setgetyear] = useState(0);
   const [year, setYear] = useState(2024);
   const [janExp, setJanExp] = useState(0);
   const [febEXP, setfebEXP] = useState(0);
