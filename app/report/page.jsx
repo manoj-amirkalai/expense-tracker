@@ -4,6 +4,7 @@ import {
   useMaterialReactTable,
   createMRTColumnHelper,
 } from "material-react-table";
+import './page.css'
 import { transactions } from "../data";
 import { Box, Button } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
