@@ -5,6 +5,7 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import { LuEye } from "react-icons/lu";
 import { MdEdit } from "react-icons/md";
 const page = () => {
+  
   return (
     <div className="expense">
       {" "}

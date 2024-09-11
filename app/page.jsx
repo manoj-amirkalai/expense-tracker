@@ -6,12 +6,14 @@ import { BsGraphDownArrow } from "react-icons/bs";
 import { BsGraphUpArrow } from "react-icons/bs";
 import ApexCharts from "react-apexcharts";
 import { useEffect, useState } from "react";
+import { Input } from "antd";
+const { Search } = Input;
 
 export default function Home() {
   // console.log("height:", window.innerHeight);
   // console.log("width:", window.innerWidth);
-  const [getyear, setgetyear] = useState(2024);
-  const [year, setYear] = useState(2023);
+  const [getyear, setgetyear] = useState(0);
+  const [year, setYear] = useState(2024);
   const [janExp, setJanExp] = useState(0);
   const [febEXP, setfebEXP] = useState(0);
   const [marExp, setmarExp] = useState(0);
@@ -37,12 +39,10 @@ export default function Home() {
   const [novInc, setnovInc] = useState(0);
   const [decInc, setdecInc] = useState(0);
 
-  const [transactionsFiltered, setTransactionsFiltered] = useState([
-    ...transactions,
-  ]);
+  const [transactionsFiltered, setTransactionsFiltered] = useState([]);
 
   useEffect(() => {
-    const filteredyear = transactionsFiltered.filter((transaction) => {
+    const filteredyear = transactions.filter((transaction) => {
       const yearFilter = new Date(transaction.date).getFullYear();
 
       return yearFilter === year;
@@ -415,11 +415,11 @@ export default function Home() {
           "Nov",
           "Dec",
         ],
-        colors: ["#9A4BFF", "#FF489B", "#FF489B", "#FF489B"],
       },
+      colors: ['#da5552', '#37a572'], 
       yaxis: {
         title: {
-          text: "",
+          text: "Rs(k)",
         },
       },
       fill: {
@@ -431,7 +431,15 @@ export default function Home() {
             return "Rs." + val + "k";
           },
         },
-      },
+      },  title: {
+        text: `${year}`,
+        floating: true,
+        offsetY: 0,
+        align: 'bottom',
+        style: {
+          color: '#444'
+        }
+      }
     },
   };
   const expenseTotal = transactionsFiltered
@@ -450,7 +458,6 @@ export default function Home() {
     .map((transactionsFiltered) => parseFloat(transactionsFiltered.amount))
     .reduce((total, amount) => total + amount, 0);
   const balance = incomeTotal - expenseTotal;
-
   return (
     <div className={styles.page}>
       <div className={styles.dashboard}>
@@ -464,8 +471,14 @@ export default function Home() {
           />
         </div>
         <div className={styles.dashboard_expinc}>
-        <input type="number" onChange={(e)=>setgetyear(e.target.value)} />
-        <button onClick={()=>{setYear(parseFloat(getyear))}}>submit</button>
+     
+          <Search
+          className={styles.yearsearch}
+            placeholder="Enter year to show"
+            onSearch={(value) => setYear(Number(value))}
+            enterButton
+          />
+       
           <div className={styles.dashboard_balance}>
             <span>
               <FaWallet />

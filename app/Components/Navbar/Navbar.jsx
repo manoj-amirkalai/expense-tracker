@@ -15,12 +15,7 @@ const Navbar = () => {
           <Link className="nav_item" href="/">
             Dashboard
           </Link>
-          <Link className="nav_item" href="/income">
-            Income
-          </Link>
-          <Link className="nav_item" href="/expense">
-            Expense
-          </Link>
+      
           <Link className="nav_item" href="/report">
             Report
           </Link>
