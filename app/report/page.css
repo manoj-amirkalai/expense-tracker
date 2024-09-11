@@ -1,7 +1,7 @@
 td {
   text-align: center;
 }
-td{
+td {
   height: 30px;
 }
 .title {
@@ -26,14 +26,36 @@ td{
   margin: 0 auto;
   background-color: transparent !important;
 }
-.css-1tbggly,
-.css-apge8j-MuiTableRow-root,
-.css-hsi95o-MuiTableRow-root,
-.css-10gei56 {
-  background-color: var(--bg-nav) !important;
-  backdrop-filter: blur(5px);
-}
 .css-1e2ywc-MuiTableRow-root,
 tbody tr:hover {
-  background-color: rgba(227, 233, 233, 0.082) !important;
+  background-color: var(--report-hover) !important;
+}
+td,
+.css-1tbggly,
+.css-1yz21rz-MuiPaper-root-MuiAlert-root,
+.css-10gei56 {
+  background-color: var(--bg-nav) !important;
+  backdrop-filter: blur(5px) !important;
+}
+.css-lgq4l5-MuiPaper-root,
+tr {
+  background-color: transparent;
+}
+.css-hsi95o-MuiTableRow-root {
+  background-color: transparent !important;
+}
+.css-118e0ip-MuiTableHead-root,
+tbody tr {
+  backdrop-filter: blur(5px) !important;
+}
+
+.css-apge8j-MuiTableRow-root {
+  background-color: var(--report-head) !important;
+  backdrop-filter: blur(5px) !important;
+}
+.css-1apkmlw-MuiButtonBase-root-MuiButton-root {
+  color: black !important;
+}
+.css-1ucns9m-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
+  color: rgba(0, 0, 0, 0.555) !important;
 }
