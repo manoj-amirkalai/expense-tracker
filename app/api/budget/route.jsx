@@ -23,3 +23,13 @@ export async function POST(request) {
     return NextResponse.json({ message: e.message }, { status: 500 });
   }
 }
+export async function GET(request) {
+  try {
+    await connectMongoDB();
+    const response = await Budget.find();
+
+    return NextResponse.json({ response: response }, { status: 201 });
+  } catch (e) {
+    return NextResponse.json({ message: e.message }, { status: 500 });
+  }
+}

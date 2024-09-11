@@ -4,19 +4,32 @@ import {
   useMaterialReactTable,
   createMRTColumnHelper,
 } from "material-react-table";
-import './page.css'
-import { transactions } from "../data";
+import "./page.css";
 import { Box, Button } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { mkConfig, generateCsv, download } from "export-to-csv"; // or use your library of choice here
 import { LuEye } from "react-icons/lu";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin2Fill } from "react-icons/ri";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Page = () => {
-  const [data, setData] = useState([...transactions]);
+  const [data, setData] = useState([]);
+  const getdata = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/budget");
+      const fetcheddata = response.data.response;
+      setData([...fetcheddata]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    getdata();
+
+    console.log(data);
+  }, []);
   const columnHelper = createMRTColumnHelper();
 
   const columns = [
@@ -24,7 +37,7 @@ const Page = () => {
       header: "ID",
       size: 15,
     }),
-    columnHelper.accessor("title", {
+    columnHelper.accessor("paidfor", {
       header: "Paid For",
       size: 15,
     }),
@@ -58,13 +71,13 @@ const Page = () => {
         return (
           <div className="action">
             {" "}
-            <LuEye
+            {/* <LuEye
               className="action_icons"
               style={{ color: "green", cursor: "pointer", fontSize: "15px" }}
               onClick={() => {
                 const { id } = row;
               }}
-            />
+            /> */}
             &nbsp;&nbsp;
             <MdEdit
               className="action_icons"
