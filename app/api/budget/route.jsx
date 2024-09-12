@@ -31,3 +31,14 @@ export async function GET(request) {
     return NextResponse.json({ message: e.message }, { status: 500 });
   }
 }
+export async function DELETE(request) {
+  const { id } = await request.json();
+  try {
+    await connectMongoDB();
+    const response = await Budget.findByIdAndDelete(id);
+
+    return NextResponse.json({ response: "Deleted" }, { status: 201 });
+  } catch (e) {
+    return NextResponse.json({ message: e.message }, { status: 500 });
+  }
+}

@@ -35,7 +35,6 @@ const Page = () => {
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
   const [dateTime, setDateTime] = useState(dayjs(new Date()));
-  const [transactionData, setTransactionData] = useState({});
   let count = 0;
   const getdata = async () => {
     try {
@@ -77,7 +76,8 @@ const Page = () => {
     }),
     columnHelper.accessor(
       (row) => {
-        return <p>{row.datetime.slice(0, 15)}</p>;
+        const dateandtime = new Date(row.datetime).toString().slice(0, 25);
+        return <p>{dateandtime.slice(0, 15)}</p>;
       },
       {
         header: "Time",
@@ -86,7 +86,9 @@ const Page = () => {
     ),
     columnHelper.accessor(
       (row) => {
-        return <p>{row.datetime.slice(16, 21)}</p>;
+        const dateandtime = new Date(row.datetime).toString().slice(0, 25);
+
+        return <p>{dateandtime.slice(16, 21)}</p>;
       },
       {
         header: " Time",
@@ -112,19 +114,50 @@ const Page = () => {
             /> */}
             <MdEdit
               className="action_icons"
-              onClick={() => {
-                const { id } = row;
+              onClick={async () => {
+                const { _id } = row;
+                try {
+                  const response = await axios.get(
+                    `http://localhost:3000/api/budget/${_id}`
+                  );
+                  const responsedata = response.data.response;
+
+                  showModal();
+                  console.log(responsedata);
+                  setPaidfor(responsedata.paidfor);
+                  setPaidby(responsedata.paidby);
+                  setPaidusing(responsedata.paidusing);
+                  setAmount(responsedata.amount);
+                  setCategory(responsedata.category);
+                } catch (e) {
+                  console.log(e);
+                }
               }}
             />
             <Popconfirm
               title="Delete the task"
               description="Are you sure to delete this task?"
-              onConfirm={() => {
-                const { id } = row;
-                const dataFilter = data.filter((data) => data.id !== id);
-                setData([...dataFilter]);
+              onConfirm={async () => {
+                const { _id } = row;
 
-                message.success("Data deleted");
+                try {
+                  const res = await fetch(
+                    `http://localhost:3000/api/budget`,
+
+                    {
+                      method: "DELETE",
+                      headers: {
+                        "Content-type": "application/json",
+                      },
+                      body: JSON.stringify({ id: _id }),
+                    }
+                  );
+                  getdata();
+                  message.success("Data deleted");
+                } catch (e) {
+                  console.log(e);
+                  message.error("Failed to deleted");
+                }
               }}
               onCancel={() => {
                 message.error("Data not deleted");
@@ -132,7 +165,7 @@ const Page = () => {
               okText="Yes"
               cancelText="No"
             >
-              <Button danger>
+              <Button >
                 {" "}
                 <RiDeleteBin2Fill
                   style={{ color: "red", cursor: "pointer", fontSize: "15px" }}
@@ -221,14 +254,7 @@ const Page = () => {
   };
   const handleOk = async () => {
     setLoading(true);
-    setTransactionData({
-      paidfor: paidfor,
-      paidby: paidby,
-      paidusing: paidusing,
-      category: category,
-      datetime: new Date(dateTime).toString().slice(0, 25),
-      amount: amount,
-    });
+
     try {
       const res = await fetch(
         `http://localhost:3000/api/budget`,
@@ -238,11 +264,18 @@ const Page = () => {
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify(transactionData),
+          body: JSON.stringify({
+            paidfor: paidfor,
+            paidby: paidby,
+            paidusing: paidusing,
+            category: category,
+            datetime: dateTime,
+            amount: amount,
+          }),
         }
       );
       console.log("response", res);
-
+      getdata();
       setPaidby("");
       setPaidfor("");
       setPaidusing("");
@@ -256,7 +289,51 @@ const Page = () => {
     }
   };
   const handleCancel = () => {
+    setPaidby("");
+    setPaidfor("");
+    setPaidusing("");
+    setDateTime(dayjs(new Date()));
+    setCategory("");
+    setAmount(0);
+    setLoading(false);
     setOpen(false);
+  };
+  const handleUpdate = async (_id) => {
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/budget/${_id}`,
+
+        {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            paidfor: paidfor,
+            paidby: paidby,
+            paidusing: paidusing,
+            category: category,
+            datetime: dateTime,
+            // new Date(dateTime).toString().slice(0, 25)
+            amount: amount,
+          }),
+        }
+      );
+      console.log("response", res);
+      getdata();
+      setPaidby("");
+      setPaidfor("");
+      setPaidusing("");
+      setDateTime(dayjs(new Date()));
+      setCategory("");
+      setAmount(0);
+      setLoading(false);
+      setOpen(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <>
@@ -290,14 +367,14 @@ const Page = () => {
               placeholder="Paid Using"
             />
             <Radio.Group
-              defaultValue={category}
+              value={category}
               onChange={(event) => {
                 setCategory(event.target.value);
               }}
               buttonStyle="solid"
             >
-              <Radio.Button value="income">Income</Radio.Button>
-              <Radio.Button value="expense">Expense</Radio.Button>
+              <Radio.Button value="Income">Income</Radio.Button>
+              <Radio.Button value="Expense">Expense</Radio.Button>
             </Radio.Group>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={["DateTimePicker"]}>
