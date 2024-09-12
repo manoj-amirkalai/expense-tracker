@@ -2,10 +2,6 @@ import mongoose, { Schema } from "mongoose";
 
 const BudgetSchema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
-      required: true,
-    },
     paidfor: {
       type: String,
       required: true,
@@ -22,13 +18,11 @@ const BudgetSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    date: {
+    datetime: {
       type: String,
     },
-    time: {
-      type: String,
-    },
-    type: {
+
+    category: {
       type: String,
       required: true,
     },

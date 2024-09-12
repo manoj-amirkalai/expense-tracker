@@ -77,7 +77,12 @@ tbody tr {
 .add_button {
   position: absolute;
   top: 2%;
-  right: 11%;
+  right: 160px;
   z-index: 2;
   transform: scale(0.7);
+}
+.add_inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

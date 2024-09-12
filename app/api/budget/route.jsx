@@ -3,19 +3,17 @@ import Budget from "@/models/budget";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { id, paidby, amount, paidfor, paidusing, date, time, type } =
+  const { paidby, amount, paidfor, paidusing, datetime, category } =
     await request.json();
   try {
     await connectMongoDB();
     await Budget.create({
-      id: id,
       paidfor: paidfor,
       amount: amount,
       paidby: paidby,
       paidusing: paidusing,
-      date: date,
-      time: time,
-      type: type,
+      datetime: datetime,
+      category: category,
     });
 
     return NextResponse.json({ message: "success" }, { status: 201 });

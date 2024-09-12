@@ -4,7 +4,13 @@ import {
   useMaterialReactTable,
   createMRTColumnHelper,
 } from "material-react-table";
-import { Button as Buttons, message, Modal, Popconfirm } from "antd";
+import {
+  Button as Buttons,
+  InputNumber,
+  message,
+  Modal,
+  Popconfirm,
+} from "antd";
 import "./page.css";
 import { Box, Button } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -14,9 +20,23 @@ import { MdEdit } from "react-icons/md";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { Input } from "antd";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { Radio } from "antd";
+import dayjs from "dayjs";
 const Page = () => {
   const [data, setData] = useState([]);
+  const [paidfor, setPaidfor] = useState("");
+  const [paidby, setPaidby] = useState("");
+  const [paidusing, setPaidusing] = useState("");
+  const [category, setCategory] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [dateTime, setDateTime] = useState(dayjs(new Date()));
+  const [transactionData, setTransactionData] = useState({});
+  let count = 0;
   const getdata = async () => {
     try {
       const response = await axios.get("http://localhost:3000/api/budget");
@@ -34,7 +54,7 @@ const Page = () => {
   const columnHelper = createMRTColumnHelper();
 
   const columns = [
-    columnHelper.accessor("id", {
+    columnHelper.accessor(count++, {
       header: "ID",
       size: 15,
     }),
@@ -51,18 +71,29 @@ const Page = () => {
       size: 15,
     }),
 
-    columnHelper.accessor("type", {
+    columnHelper.accessor("category", {
       header: "Category",
       size: 15,
     }),
-    columnHelper.accessor("date", {
-      header: "Date",
-      size: 15,
-    }),
-    columnHelper.accessor("time", {
-      header: "Time",
-      size: 15,
-    }),
+    columnHelper.accessor(
+      (row) => {
+        return <p>{row.datetime.slice(0, 15)}</p>;
+      },
+      {
+        header: "Time",
+        size: 15,
+      }
+    ),
+    columnHelper.accessor(
+      (row) => {
+        return <p>{row.datetime.slice(16, 21)}</p>;
+      },
+      {
+        header: " Time",
+        size: 15,
+      }
+    ),
+
     columnHelper.accessor("amount", {
       header: "Amount",
       size: 15,
@@ -85,7 +116,6 @@ const Page = () => {
                 const { id } = row;
               }}
             />
-        
             <Popconfirm
               title="Delete the task"
               description="Are you sure to delete this task?"
@@ -184,38 +214,124 @@ const Page = () => {
       </Box>
     ),
   });
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState('Content of the modal');
   const showModal = () => {
     setOpen(true);
   };
-  const handleOk = () => {
-    setModalText('The modal will be closed after two seconds');
-    setConfirmLoading(true);
-    setTimeout(() => {
+  const handleOk = async () => {
+    setLoading(true);
+    setTransactionData({
+      paidfor: paidfor,
+      paidby: paidby,
+      paidusing: paidusing,
+      category: category,
+      datetime: new Date(dateTime).toString().slice(0, 25),
+      amount: amount,
+    });
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/budget`,
+
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(transactionData),
+        }
+      );
+      console.log("response", res);
+
+      setPaidby("");
+      setPaidfor("");
+      setPaidusing("");
+      setDateTime(dayjs(new Date()));
+      setCategory("");
+      setAmount(0);
+      setLoading(false);
       setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
+    } catch (e) {
+      console.log(e);
+    }
   };
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     setOpen(false);
   };
   return (
     <>
-      <div className="transaction_data" >
-      <Modal
-        title="Title"
-        open={open}
-        onOk={handleOk}
-        confirmLoading={confirmLoading}
-        onCancel={handleCancel}
-      >
-        <p>{modalText}</p>
-      </Modal>
+      <div className="transaction_data">
+        <Modal open={open} onCancel={handleCancel} footer={[]}>
+          <h2>Add Transaction</h2>
+
+          <div className="add_inputs">
+            <Input
+              status=""
+              value={paidfor}
+              onChange={(event) => {
+                setPaidfor(event.target.value);
+              }}
+              placeholder="Paid For"
+            />
+            <Input
+              status=""
+              value={paidby}
+              onChange={(event) => {
+                setPaidby(event.target.value);
+              }}
+              placeholder="Paid By"
+            />
+            <Input
+              status=""
+              value={paidusing}
+              onChange={(event) => {
+                setPaidusing(event.target.value);
+              }}
+              placeholder="Paid Using"
+            />
+            <Radio.Group
+              defaultValue={category}
+              onChange={(event) => {
+                setCategory(event.target.value);
+              }}
+              buttonStyle="solid"
+            >
+              <Radio.Button value="income">Income</Radio.Button>
+              <Radio.Button value="expense">Expense</Radio.Button>
+            </Radio.Group>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={["DateTimePicker"]}>
+                <DateTimePicker
+                  value={dateTime}
+                  onChange={(newValue) => setDateTime(newValue)}
+                  label="Basic date time picker"
+                />
+              </DemoContainer>
+            </LocalizationProvider>
+            <InputNumber
+              status=""
+              onChange={(event) => {
+                setAmount(event);
+              }}
+              type="number"
+              value={amount}
+              placeholder="Amount"
+            />
+          </div>
+
+          <Buttons
+            key="submit"
+            type="primary"
+            loading={loading}
+            onClick={handleOk}
+          >
+            Add
+          </Buttons>
+        </Modal>
         <MaterialReactTable table={table} />
-        <Button className="add_button" onClick={showModal} variant="outlined">Add</Button>
+        <Button className="add_button" onClick={showModal} variant="outlined">
+          Add
+        </Button>
       </div>
     </>
   );
