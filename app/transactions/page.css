@@ -77,12 +77,31 @@ tbody tr {
 .add_button {
   position: absolute;
   top: 2%;
-  right: 160px;
+  right: 140px;
   z-index: 2;
   transform: scale(0.7);
 }
-.add_inputs{
+.add_inputs {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 20px;
+}
+.add_icon {
+  font-size: 1vw;
+  color: blue;
+}
+.add_update {
+  margin: 10px;
+}
+.label_input {
+  display: flex;
+  align-items: center;
+}
+.label_input p {
+  width: 20%;
+}
+.modal_button {
+  display: flex;
+  justify-content: center;
 }

@@ -26,6 +26,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { Radio } from "antd";
+import { IoAddCircle } from "react-icons/io5";
 import dayjs from "dayjs";
 const Page = () => {
   const [data, setData] = useState([]);
@@ -34,7 +35,9 @@ const Page = () => {
   const [paidusing, setPaidusing] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
+  const [updateId, setUpdateId] = useState("");
   const [dateTime, setDateTime] = useState(dayjs(new Date()));
+  const [updateModel, setUpdateModel] = useState(false);
   let count = 0;
   const getdata = async () => {
     try {
@@ -121,6 +124,7 @@ const Page = () => {
             <MdEdit
               className="action_icons"
               onClick={async () => {
+                setUpdateModel(true);
                 const { _id } = row;
                 try {
                   const response = await axios.get(
@@ -129,7 +133,7 @@ const Page = () => {
                   const responsedata = response.data.response;
 
                   showModal();
-                  console.log(responsedata);
+                  setUpdateId(_id);
                   setPaidfor(responsedata.paidfor);
                   setPaidby(responsedata.paidby);
                   setPaidusing(responsedata.paidusing);
@@ -282,7 +286,6 @@ const Page = () => {
           }),
         }
       );
-      console.log("response", res);
       getdata();
       setPaidby("");
       setPaidfor("");
@@ -297,6 +300,7 @@ const Page = () => {
     }
   };
   const handleCancel = () => {
+    setUpdateModel(false);
     setPaidby("");
     setPaidfor("");
     setPaidusing("");
@@ -306,12 +310,12 @@ const Page = () => {
     setLoading(false);
     setOpen(false);
   };
-  const handleUpdate = async (_id) => {
+  const handleUpdate = async () => {
     setLoading(true);
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/budget/${_id}`,
+        `http://localhost:3000/api/budget/${updateId}`,
 
         {
           method: "PUT",
@@ -324,12 +328,10 @@ const Page = () => {
             paidusing: paidusing,
             category: category,
             datetime: dateTime,
-            // new Date(dateTime).toString().slice(0, 25)
             amount: amount,
           }),
         }
       );
-      console.log("response", res);
       getdata();
       setPaidby("");
       setPaidfor("");
@@ -350,72 +352,104 @@ const Page = () => {
           <h2>Add Transaction</h2>
 
           <div className="add_inputs">
-            <Input
-              status=""
-              value={paidfor}
-              onChange={(event) => {
-                setPaidfor(event.target.value);
-              }}
-              placeholder="Paid For"
-            />
-            <Input
-              status=""
-              value={paidby}
-              onChange={(event) => {
-                setPaidby(event.target.value);
-              }}
-              placeholder="Paid By"
-            />
-            <Input
-              status=""
-              value={paidusing}
-              onChange={(event) => {
-                setPaidusing(event.target.value);
-              }}
-              placeholder="Paid Using"
-            />
-            <Radio.Group
-              value={category}
-              onChange={(event) => {
-                setCategory(event.target.value);
-              }}
-              buttonStyle="solid"
-            >
-              <Radio.Button value="Income">Income</Radio.Button>
-              <Radio.Button value="Expense">Expense</Radio.Button>
-            </Radio.Group>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DateTimePicker"]}>
-                <DateTimePicker
-                  value={dateTime}
-                  onChange={(newValue) => setDateTime(newValue)}
-                  label="Basic date time picker"
-                />
-              </DemoContainer>
-            </LocalizationProvider>
-            <InputNumber
-              status=""
-              onChange={(event) => {
-                setAmount(event);
-              }}
-              type="number"
-              value={amount}
-              placeholder="Amount"
-            />
+            <div className="label_input">
+              <p>Paid For :</p>
+              <Input
+                status=""
+                value={paidfor}
+                onChange={(event) => {
+                  setPaidfor(event.target.value);
+                }}
+                placeholder="Paid For"
+              />
+            </div>{" "}
+            <div className="label_input">
+              <p>Paid By :</p>
+              <Input
+                status=""
+                value={paidby}
+                onChange={(event) => {
+                  setPaidby(event.target.value);
+                }}
+                placeholder="Paid By"
+              />
+            </div>{" "}
+            <div className="label_input">
+              <p>Paid Using :</p>
+              <Input
+                status=""
+                value={paidusing}
+                onChange={(event) => {
+                  setPaidusing(event.target.value);
+                }}
+                placeholder="Paid Using"
+              />
+            </div>
+            <div className="label_input">
+              <p>Category :</p>
+              <Radio.Group
+                value={category}
+                onChange={(event) => {
+                  setCategory(event.target.value);
+                }}
+                buttonStyle="solid"
+              >
+                <Radio.Button value="Income">Income</Radio.Button>
+                <Radio.Button value="Expense">Expense</Radio.Button>
+              </Radio.Group>
+            </div>
+            <div className="label_input">
+              <p>Date & Time :</p>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DateTimePicker"]}>
+                  <DateTimePicker
+                    value={dateTime}
+                    onChange={(newValue) => setDateTime(newValue)}
+                    label="Basic date time picker"
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </div>{" "}
+            <div className="label_input">
+              <p>Amount :</p>
+              <InputNumber
+                status=""
+                onChange={(event) => {
+                  setAmount(event);
+                }}
+                type="number"
+                value={amount}
+                placeholder="Amount"
+              />
+            </div>
           </div>
-
-          <Buttons
-            key="submit"
-            type="primary"
-            loading={loading}
-            onClick={handleOk}
-          >
-            Add
-          </Buttons>
+<div className="modal_button">
+          {updateModel ? (
+            <Buttons
+              key="submit"
+              type="primary"
+              loading={loading}
+              onClick={handleUpdate}
+              className="add_update"
+            >
+              Update
+            </Buttons>
+          ) : (
+            <Buttons
+              key="submit"
+              type="primary"
+              loading={loading}
+              onClick={handleOk}
+              className="add_update"
+            >
+              Add
+            </Buttons>
+          )}</div>
         </Modal>
         <MaterialReactTable table={table} />
         <Button className="add_button" onClick={showModal} variant="outlined">
-          Add
+          {/* <IoAddCircle className="add_icon" /> */}
+          <p className="add_icon"> Add Transactions</p>
         </Button>
       </div>
     </>
