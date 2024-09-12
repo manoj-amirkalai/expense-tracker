@@ -53,13 +53,16 @@ const Page = () => {
   const columnHelper = createMRTColumnHelper();
 
   const columns = [
-    columnHelper.accessor(()=>{
-      count++
-      return  count
-    }, {
-      header: "ID",
-      size: 15,
-    }),
+    columnHelper.accessor(
+      () => {
+        count++;
+        return count;
+      },
+      {
+        header: "ID",
+        size: 15,
+      }
+    ),
     columnHelper.accessor("paidfor", {
       header: "Paid For",
       size: 15,
@@ -132,6 +135,8 @@ const Page = () => {
                   setPaidusing(responsedata.paidusing);
                   setAmount(responsedata.amount);
                   setCategory(responsedata.category);
+                  const timedate = dayjs(responsedata.datetime);
+                  setDateTime(timedate);
                 } catch (e) {
                   console.log(e);
                 }
