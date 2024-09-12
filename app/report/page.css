@@ -9,9 +9,15 @@ td {
   text-align: center;
   margin-bottom: 10px;
 }
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .action_icons {
   font-size: 20px;
   cursor: pointer;
+  font-size: 15px;
 }
 .action_icons:last-child {
   color: rgb(192, 35, 35);
@@ -19,16 +25,20 @@ td {
 .action_icons:first-child {
   color: green;
 }
-.action_icons:nth-child(2) {
+.action_icons:nth-child(1) {
   color: blue;
 }
 .report_table {
   margin: 0 auto;
   background-color: transparent !important;
 }
-.css-1e2ywc-MuiTableRow-root,
+.css-1e2ywc-MuiTableRow-root {
+  background-color: rgba(69, 94, 69, 0) !important;
+  backdrop-filter: blur(7px) !important;
+
+}
 tbody tr:hover {
-  background-color: var(--report-hover) !important;
+  backdrop-filter: blur(7px) !important;
 }
 td,
 .css-1tbggly,
@@ -59,3 +69,4 @@ tbody tr {
 .css-1ucns9m-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
   color: rgba(0, 0, 0, 0.555) !important;
 }
+

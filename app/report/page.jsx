@@ -4,6 +4,7 @@ import {
   useMaterialReactTable,
   createMRTColumnHelper,
 } from "material-react-table";
+import { Button as Buttons, message, Popconfirm } from "antd";
 import "./page.css";
 import { Box, Button } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -78,24 +79,37 @@ const Page = () => {
                 const { id } = row;
               }}
             /> */}
-            &nbsp;&nbsp;
             <MdEdit
               className="action_icons"
-              style={{ color: "blue", cursor: "pointer", fontSize: "15px" }}
               onClick={() => {
                 const { id } = row;
               }}
             />
-            &nbsp;&nbsp;
-            <RiDeleteBin2Fill
-              style={{ color: "red", cursor: "pointer", fontSize: "15px" }}
-              className="action_icons"
-              onClick={() => {
+        
+            <Popconfirm
+              title="Delete the task"
+              description="Are you sure to delete this task?"
+              onConfirm={() => {
                 const { id } = row;
                 const dataFilter = data.filter((data) => data.id !== id);
                 setData([...dataFilter]);
+
+                message.success("Data deleted");
               }}
-            />
+              onCancel={() => {
+                message.error("Data not deleted");
+              }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button danger>
+                {" "}
+                <RiDeleteBin2Fill
+                  style={{ color: "red", cursor: "pointer", fontSize: "15px" }}
+                  className="action_icons"
+                />
+              </Button>
+            </Popconfirm>
           </div>
         );
       },
