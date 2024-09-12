@@ -16,8 +16,8 @@ const Navbar = () => {
             Dashboard
           </Link>
       
-          <Link className="nav_item" href="/report">
-            Report
+          <Link className="nav_item" href="/transactions">
+          Transactions
           </Link>
         </div>
 

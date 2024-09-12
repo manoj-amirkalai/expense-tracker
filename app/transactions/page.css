@@ -1,3 +1,8 @@
+.transaction_data {
+  width: 81vw;
+  margin: 0 auto;
+  position: relative;
+}
 td {
   text-align: center;
 }
@@ -35,7 +40,6 @@ td {
 .css-1e2ywc-MuiTableRow-root {
   background-color: rgba(69, 94, 69, 0) !important;
   backdrop-filter: blur(7px) !important;
-
 }
 tbody tr:hover {
   backdrop-filter: blur(7px) !important;
@@ -70,3 +74,10 @@ tbody tr {
   color: rgba(0, 0, 0, 0.555) !important;
 }
 
+.add_button {
+  position: absolute;
+  top: 2%;
+  right: 11%;
+  z-index: 2;
+  transform: scale(0.7);
+}

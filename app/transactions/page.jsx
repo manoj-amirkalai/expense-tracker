@@ -4,7 +4,7 @@ import {
   useMaterialReactTable,
   createMRTColumnHelper,
 } from "material-react-table";
-import { Button as Buttons, message, Popconfirm } from "antd";
+import { Button as Buttons, message, Modal, Popconfirm } from "antd";
 import "./page.css";
 import { Box, Button } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -184,11 +184,38 @@ const Page = () => {
       </Box>
     ),
   });
-
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState('Content of the modal');
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleOk = () => {
+    setModalText('The modal will be closed after two seconds');
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+  const handleCancel = () => {
+    console.log('Clicked cancel button');
+    setOpen(false);
+  };
   return (
     <>
-      <div style={{ width: "81vw", margin: "0 auto" }}>
+      <div className="transaction_data" >
+      <Modal
+        title="Title"
+        open={open}
+        onOk={handleOk}
+        confirmLoading={confirmLoading}
+        onCancel={handleCancel}
+      >
+        <p>{modalText}</p>
+      </Modal>
         <MaterialReactTable table={table} />
+        <Button className="add_button" onClick={showModal} variant="outlined">Add</Button>
       </div>
     </>
   );
