@@ -53,7 +53,10 @@ const Page = () => {
   const columnHelper = createMRTColumnHelper();
 
   const columns = [
-    columnHelper.accessor(count++, {
+    columnHelper.accessor(()=>{
+      count++
+      return  count
+    }, {
       header: "ID",
       size: 15,
     }),
@@ -160,12 +163,12 @@ const Page = () => {
                 }
               }}
               onCancel={() => {
-                message.error("Data not deleted");
+                message.info("Data not deleted");
               }}
               okText="Yes"
               cancelText="No"
             >
-              <Button >
+              <Button>
                 {" "}
                 <RiDeleteBin2Fill
                   style={{ color: "red", cursor: "pointer", fontSize: "15px" }}
