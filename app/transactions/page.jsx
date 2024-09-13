@@ -86,10 +86,12 @@ const Page = () => {
     columnHelper.accessor(
       (row) => {
         const dateandtime = new Date(row.datetime).toString().slice(0, 25);
-        return <p>{dateandtime.slice(0, 15)}</p>;
+        console.log(typeof dateandtime.slice(0, 15));
+
+        return <p>{dateandtime.slice(4, 15)}</p>;
       },
       {
-        header: "Time",
+        header: "Date",
         size: 15,
       }
     ),
@@ -423,28 +425,29 @@ const Page = () => {
               />
             </div>
           </div>
-<div className="modal_button">
-          {updateModel ? (
-            <Buttons
-              key="submit"
-              type="primary"
-              loading={loading}
-              onClick={handleUpdate}
-              className="add_update"
-            >
-              Update
-            </Buttons>
-          ) : (
-            <Buttons
-              key="submit"
-              type="primary"
-              loading={loading}
-              onClick={handleOk}
-              className="add_update"
-            >
-              Add
-            </Buttons>
-          )}</div>
+          <div className="modal_button">
+            {updateModel ? (
+              <Buttons
+                key="submit"
+                type="primary"
+                loading={loading}
+                onClick={handleUpdate}
+                className="add_update"
+              >
+                Update
+              </Buttons>
+            ) : (
+              <Buttons
+                key="submit"
+                type="primary"
+                loading={loading}
+                onClick={handleOk}
+                className="add_update"
+              >
+                Add
+              </Buttons>
+            )}
+          </div>
         </Modal>
         <MaterialReactTable table={table} />
         <Button className="add_button" onClick={showModal} variant="outlined">

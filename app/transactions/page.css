@@ -76,7 +76,7 @@ tbody tr {
 
 .add_button {
   position: absolute;
-  top: 2%;
+  top: 0.5%;
   right: 140px;
   z-index: 2;
   transform: scale(0.7);

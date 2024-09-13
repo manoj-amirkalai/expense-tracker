@@ -1,12 +1,12 @@
 "use client";
 import styles from "./page.module.css";
-import { transactions } from "./data";
 import { FaWallet } from "react-icons/fa6";
 import { BsGraphDownArrow } from "react-icons/bs";
 import { BsGraphUpArrow } from "react-icons/bs";
 import ApexCharts from "react-apexcharts";
 import { useEffect, useState } from "react";
 import { Input } from "antd";
+import axios from "axios";
 const { Search } = Input;
 
 export default function Home() {
@@ -35,23 +35,37 @@ export default function Home() {
   const [octInc, setoctInc] = useState(0);
   const [novInc, setnovInc] = useState(0);
   const [decInc, setdecInc] = useState(0);
+  const [transactions, settransactions] = useState([]);
+  const getdata = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/budget");
+      const fetcheddata = response.data.response;
+      settransactions([...fetcheddata]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    getdata();
+  }, []);
 
   const [transactionsFiltered, setTransactionsFiltered] = useState([]);
 
   useEffect(() => {
-    const filteredyear = transactions.filter((transaction) => {
-      const yearFilter = new Date(transaction.date).getFullYear();
-
-      return yearFilter === year;
-    });
-    setTransactionsFiltered(filteredyear);
-  }, [year]);
+    if (transactions) {
+      const filteredyear = transactions.filter((transaction) => {
+        const yearFilter = new Date(transaction.datetime).getFullYear();
+        return yearFilter === year;
+      });
+      setTransactionsFiltered(filteredyear);
+    }
+  }, [year, transactions]);
 
   const calculateJan = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 1;
       })
       .reduce((total, tx) => {
@@ -60,9 +74,9 @@ export default function Home() {
     setjanInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 1;
       })
       .reduce((total, tx) => {
@@ -73,9 +87,9 @@ export default function Home() {
 
   const calculateFeb = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 2;
       })
       .reduce((total, tx) => {
@@ -84,9 +98,9 @@ export default function Home() {
     setfebInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 2;
       })
       .reduce((total, tx) => {
@@ -97,9 +111,9 @@ export default function Home() {
 
   const calculatemar = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 3;
       })
       .reduce((total, tx) => {
@@ -108,9 +122,9 @@ export default function Home() {
     setmarInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 3;
       })
       .reduce((total, tx) => {
@@ -121,9 +135,9 @@ export default function Home() {
 
   const calculateapr = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 4;
       })
       .reduce((total, tx) => {
@@ -132,9 +146,9 @@ export default function Home() {
     setaprInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 4;
       })
       .reduce((total, tx) => {
@@ -144,9 +158,9 @@ export default function Home() {
   };
   const calculatemay = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 5;
       })
       .reduce((total, tx) => {
@@ -155,9 +169,9 @@ export default function Home() {
     setmayInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 5;
       })
       .reduce((total, tx) => {
@@ -167,9 +181,9 @@ export default function Home() {
   };
   const calculatejun = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 6;
       })
       .reduce((total, tx) => {
@@ -178,9 +192,9 @@ export default function Home() {
     setjunInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 6;
       })
       .reduce((total, tx) => {
@@ -190,9 +204,9 @@ export default function Home() {
   };
   const calculatejul = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 7;
       })
       .reduce((total, tx) => {
@@ -201,9 +215,9 @@ export default function Home() {
     setjulInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 7;
       })
       .reduce((total, tx) => {
@@ -213,9 +227,9 @@ export default function Home() {
   };
   const calculateaug = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 8;
       })
       .reduce((total, tx) => {
@@ -224,9 +238,9 @@ export default function Home() {
     setaugInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 8;
       })
       .reduce((total, tx) => {
@@ -236,9 +250,9 @@ export default function Home() {
   };
   const calculatesep = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 9;
       })
       .reduce((total, tx) => {
@@ -247,9 +261,9 @@ export default function Home() {
     setsepInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 9;
       })
       .reduce((total, tx) => {
@@ -259,9 +273,9 @@ export default function Home() {
   };
   const calculateoct = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 10;
       })
       .reduce((total, tx) => {
@@ -270,9 +284,9 @@ export default function Home() {
     setoctInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 10;
       })
       .reduce((total, tx) => {
@@ -282,9 +296,9 @@ export default function Home() {
   };
   const calculatenov = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 11;
       })
       .reduce((total, tx) => {
@@ -293,9 +307,9 @@ export default function Home() {
     setnovInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 11;
       })
       .reduce((total, tx) => {
@@ -305,9 +319,9 @@ export default function Home() {
   };
   const calculatedec = () => {
     const income = transactionsFiltered
-      .filter((tx) => tx.type === "Income")
+      .filter((tx) => tx.category === "Income")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 12;
       })
       .reduce((total, tx) => {
@@ -316,9 +330,9 @@ export default function Home() {
     setdecInc(income);
 
     const expense = transactionsFiltered
-      .filter((tx) => tx.type === "Expense")
+      .filter((tx) => tx.category === "Expense")
       .filter((tx) => {
-        const month = new Date(tx.date).getMonth() + 1;
+        const month = new Date(tx.datetime).getMonth() + 1;
         return month === 12;
       })
       .reduce((total, tx) => {
@@ -413,7 +427,7 @@ export default function Home() {
           "Dec",
         ],
       },
-      colors: ['#da5552', '#37a572'], 
+      colors: ["#da5552", "#37a572"],
       yaxis: {
         title: {
           text: "Rs(k)",
@@ -428,21 +442,22 @@ export default function Home() {
             return "Rs." + val + "k";
           },
         },
-      },  title: {
+      },
+      title: {
         text: `${year}`,
         floating: true,
         offsetY: 0,
-        align: 'bottom',
+        align: "bottom",
         style: {
-          color: '#444'
-        }
-      }
+          color: "#444",
+        },
+      },
     },
   };
   const expenseTotal = transactionsFiltered
     .filter(
       (transactionsFiltered) =>
-        transactionsFiltered.type.toLowerCase() === "expense"
+        transactionsFiltered.category.toLowerCase() === "expense"
     )
     .map((transactionsFiltered) => parseFloat(transactionsFiltered.amount))
     .reduce((total, amount) => total + amount, 0);
@@ -450,7 +465,7 @@ export default function Home() {
   const incomeTotal = transactionsFiltered
     .filter(
       (transactionsFiltered) =>
-        transactionsFiltered.type.toLowerCase() === "income"
+        transactionsFiltered.category.toLowerCase() === "income"
     )
     .map((transactionsFiltered) => parseFloat(transactionsFiltered.amount))
     .reduce((total, amount) => total + amount, 0);
@@ -468,14 +483,13 @@ export default function Home() {
           />
         </div>
         <div className={styles.dashboard_expinc}>
-     
           <Search
-          className={styles.yearsearch}
+            className={styles.yearsearch}
             placeholder="Enter year to show"
             onSearch={(value) => setYear(Number(value))}
             enterButton
           />
-       
+
           <div className={styles.dashboard_balance}>
             <span>
               <FaWallet />
