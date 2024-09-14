@@ -1,0 +1,51 @@
+.page {
+  height: 48vh;
+  width: 50vw;
+  margin: 10px auto;
+  background-color: var(--bg-nav);
+  backdrop-filter: blur(5px);
+  display: grid;
+  grid-template-columns: 80% 20%;
+  border-radius: 20px;
+  display: flex;
+}
+.welcome_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+.welcome_board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+.welcome_input {
+  width: 75%;
+  height: 5vh;
+}
+.welcome_board {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sign_log {
+  text-decoration: underline;
+  color: green;
+  cursor: pointer;
+}
+.welcome {
+  color: green;
+}
+.add_update {
+  background-color: green;
+}
+.welcome_profile {
+  width: 50%;
+  height: 50%;
+}
+.welcome_container {
+  margin: 12%;
+}

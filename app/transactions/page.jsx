@@ -28,6 +28,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { Radio } from "antd";
 import { IoAddCircle } from "react-icons/io5";
 import dayjs from "dayjs";
+import Navbar from "../Components/Navbar/Navbar";
 const Page = () => {
   const [data, setData] = useState([]);
   const [paidfor, setPaidfor] = useState("");
@@ -38,6 +39,11 @@ const Page = () => {
   const [updateId, setUpdateId] = useState("");
   const [dateTime, setDateTime] = useState(dayjs(new Date()));
   const [updateModel, setUpdateModel] = useState(false);
+  const [paidforerror, setPaidforerror] = useState(false);
+  const [paidbyerror, setPaidbyerror] = useState(false);
+  const [paidusingerror, setPaidusingerror] = useState(false);
+  const [categoryerror, setCategoryerror] = useState(false);
+  const [amounterror, setAmounterror] = useState(0);
   let count = 0;
   const getdata = async () => {
     try {
@@ -267,6 +273,26 @@ const Page = () => {
     setOpen(true);
   };
   const handleOk = async () => {
+    if (!paidfor || paidfor.trim().length === 0) {
+      message.error("Please enter paid for");
+      return;
+    }
+    if (!paidby || paidby.trim().length === 0) {
+      message.error("Please enter paid by");
+      return;
+    }
+    if (!paidusing || paidusing.trim().length === 0) {
+      message.error("Please enter paid using");
+      return;
+    }
+    if (category.trim().length === 0 || !category) {
+      message.error("Please select payment Category");
+      return;
+    }
+    if (!amount || amount === 0) {
+      message.error("Please enter amount");
+      return;
+    }
     setLoading(true);
 
     try {
@@ -349,6 +375,8 @@ const Page = () => {
   };
   return (
     <>
+      {" "}
+      <Navbar />
       <div className="transaction_data">
         <Modal open={open} onCancel={handleCancel} footer={[]}>
           <h2>Add Transaction</h2>
@@ -357,7 +385,7 @@ const Page = () => {
             <div className="label_input">
               <p>Paid For :</p>
               <Input
-                status=""
+                status={paidbyerror}
                 value={paidfor}
                 onChange={(event) => {
                   setPaidfor(event.target.value);
@@ -368,7 +396,7 @@ const Page = () => {
             <div className="label_input">
               <p>Paid By :</p>
               <Input
-                status=""
+                status={paidforerror}
                 value={paidby}
                 onChange={(event) => {
                   setPaidby(event.target.value);
@@ -379,7 +407,7 @@ const Page = () => {
             <div className="label_input">
               <p>Paid Using :</p>
               <Input
-                status=""
+                status={paidusingerror}
                 value={paidusing}
                 onChange={(event) => {
                   setPaidusing(event.target.value);
@@ -415,7 +443,7 @@ const Page = () => {
             <div className="label_input">
               <p>Amount :</p>
               <InputNumber
-                status=""
+                status={amounterror}
                 onChange={(event) => {
                   setAmount(event);
                 }}
