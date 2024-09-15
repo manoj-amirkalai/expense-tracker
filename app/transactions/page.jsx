@@ -39,10 +39,10 @@ const Page = () => {
   const [updateId, setUpdateId] = useState("");
   const [dateTime, setDateTime] = useState(dayjs(new Date()));
   const [updateModel, setUpdateModel] = useState(false);
-  const [paidforerror, setPaidforerror] = useState(false);
-  const [paidbyerror, setPaidbyerror] = useState(false);
-  const [paidusingerror, setPaidusingerror] = useState(false);
-  const [categoryerror, setCategoryerror] = useState(false);
+  const [paidforerror, setPaidforerror] = useState("");
+  const [paidbyerror, setPaidbyerror] = useState("");
+  const [paidusingerror, setPaidusingerror] = useState("");
+  const [categoryerror, setCategoryerror] = useState("");
   const [amounterror, setAmounterror] = useState(0);
   let count = 0;
   const getdata = async () => {
@@ -56,11 +56,25 @@ const Page = () => {
   };
   useEffect(() => {
     getdata();
-
-    console.log(data);
   }, []);
   const columnHelper = createMRTColumnHelper();
-
+  const errorCheck = () => {
+    if (paidfor.trim().length > 0) {
+      setPaidforerror("");
+    }
+    if (paidby.trim().length > 0) {
+      setPaidbyerror("");
+    }
+    if (paidusing.trim().length > 0) {
+      setPaidusingerror("");
+    }
+    if (category) {
+      setCategoryerror("");
+    }
+    if (amount > 0) {
+      setAmounterror("");
+    }
+  };
   const columns = [
     columnHelper.accessor(
       () => {
@@ -273,24 +287,34 @@ const Page = () => {
     setOpen(true);
   };
   const handleOk = async () => {
-    if (!paidfor || paidfor.trim().length === 0) {
-      message.error("Please enter paid for");
-      return;
-    }
-    if (!paidby || paidby.trim().length === 0) {
-      message.error("Please enter paid by");
-      return;
-    }
-    if (!paidusing || paidusing.trim().length === 0) {
-      message.error("Please enter paid using");
-      return;
-    }
-    if (category.trim().length === 0 || !category) {
-      message.error("Please select payment Category");
-      return;
-    }
-    if (!amount || amount === 0) {
-      message.error("Please enter amount");
+    if (
+      !paidfor ||
+      paidfor.trim().length === 0 ||
+      !paidby ||
+      paidby.trim().length === 0 ||
+      !paidusing ||
+      paidusing.trim().length === 0 ||
+      !category ||
+      !amount ||
+      amount === 0 ||
+      !category
+    ) {
+      if (!paidfor || paidfor.trim().length === 0) {
+        setPaidforerror("error");
+      }
+      if (!paidby || paidby.trim().length === 0) {
+        setPaidbyerror("error");
+      }
+      if (!paidusing || paidusing.trim().length === 0) {
+        setPaidusingerror("error");
+      }
+      if (!category) {
+        setCategoryerror("error");
+      }
+      if (!amount || amount === 0) {
+        setAmounterror("error");
+      }
+
       return;
     }
     setLoading(true);
@@ -328,6 +352,11 @@ const Page = () => {
     }
   };
   const handleCancel = () => {
+    setPaidforerror("");
+    setPaidbyerror("");
+    setPaidusingerror("");
+    setCategoryerror("");
+    setAmounterror("");
     setUpdateModel(false);
     setPaidby("");
     setPaidfor("");
@@ -385,9 +414,10 @@ const Page = () => {
             <div className="label_input">
               <p>Paid For :</p>
               <Input
-                status={paidbyerror}
+                status={paidforerror}
                 value={paidfor}
                 onChange={(event) => {
+                  errorCheck();
                   setPaidfor(event.target.value);
                 }}
                 placeholder="Paid For"
@@ -396,9 +426,10 @@ const Page = () => {
             <div className="label_input">
               <p>Paid By :</p>
               <Input
-                status={paidforerror}
+                status={paidbyerror}
                 value={paidby}
                 onChange={(event) => {
+                  errorCheck();
                   setPaidby(event.target.value);
                 }}
                 placeholder="Paid By"
@@ -410,6 +441,7 @@ const Page = () => {
                 status={paidusingerror}
                 value={paidusing}
                 onChange={(event) => {
+                  errorCheck();
                   setPaidusing(event.target.value);
                 }}
                 placeholder="Paid Using"
@@ -420,12 +452,23 @@ const Page = () => {
               <Radio.Group
                 value={category}
                 onChange={(event) => {
+                  errorCheck();
                   setCategory(event.target.value);
                 }}
                 buttonStyle="solid"
               >
-                <Radio.Button value="Income">Income</Radio.Button>
-                <Radio.Button value="Expense">Expense</Radio.Button>
+                <Radio.Button
+                  className={categoryerror === "error" ? "category_border" : ""}
+                  value="Income"
+                >
+                  Income
+                </Radio.Button>
+                <Radio.Button
+                  className={categoryerror === "error" ? "category_border" : ""}
+                  value="Expense"
+                >
+                  Expense
+                </Radio.Button>
               </Radio.Group>
             </div>
             <div className="label_input">
@@ -445,6 +488,7 @@ const Page = () => {
               <InputNumber
                 status={amounterror}
                 onChange={(event) => {
+                  errorCheck();
                   setAmount(event);
                 }}
                 type="number"

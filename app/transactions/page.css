@@ -105,3 +105,6 @@ tbody tr {
   display: flex;
   justify-content: center;
 }
+.category_border{
+  border: 1px solid red;
+}

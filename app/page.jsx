@@ -3,13 +3,106 @@ import React, { useState } from "react";
 import "./page.css";
 import logo from "@/assets/logo.png";
 import Image from "next/image";
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
+
 const Page = () => {
   const [signup, setSignup] = useState(false);
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [confrim, setconfrim] = useState("");
+  const [confrimpassword, setconfrimpassword] = useState("");
+
+  const logIn = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/api/user/", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (res.ok === false) {
+        message.error("Credentials not Matching");
+
+        return;
+      }
+      if (res.ok === true) {
+        message.success("Logged In");
+
+        setName("");
+        setemail("");
+        setpassword("");
+        setconfrimpassword("");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const signUp = async () => {
+    if (
+      !name ||
+      name.trim().length === 0 ||
+      !email ||
+      email.trim().length === 0 ||
+      !password ||
+      password.trim().length === 0 ||
+      !confrimpassword ||
+      password.trim().length === 0
+    ) {
+      if (!name || name.trim().length === 0) {
+        message.error("Name is required");
+      }
+      if (!email || email.trim().length === 0) {
+        message.error("Email is required");
+      }
+      if (!password || password.trim().length === 0) {
+        message.error("Password is required");
+      }
+      if (!confrimpassword || password.trim().length === 0) {
+        message.error("Confrim Password is required");
+      }
+
+      return;
+    }
+    if (!/^[^s@]+@[^s@]+.[^s@]+$/.test(email)) {
+    return  message.error("Invalid Email");
+    }
+    if (password !== confrimpassword) {
+      return message.error("Credentials Not matching");
+    }
+    try {
+      const res = await fetch("http://localhost:3000/api/user/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+          confrimpassword: confrimpassword,
+        }),
+      });
+      if (res.status === 500) {
+        message.error("Email already Registered");
+      }
+      if (res.status === 201) {
+        message.success("Account created");
+
+        setName("");
+        setemail("");
+        setpassword("");
+        setconfrimpassword("");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className="welcome_container">
       <div className="page">
@@ -23,39 +116,42 @@ const Page = () => {
             <Input
               status=""
               className="welcome_input"
-              // value={paidby}
-              // onChange={(event) => {
-              //   setPaidby(event.target.value);
-              // }}
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
+              }}
               placeholder="Enter your name"
             />
           )}
           <Input
             status=""
             className="welcome_input"
-            // value={paidby}
-            // onChange={(event) => {
-            //   setPaidby(event.target.value);
-            // }}
+            value={email}
+            type="email"
+            onChange={(event) => {
+              setemail(event.target.value);
+            }}
             placeholder="E-mail"
           />{" "}
-          <Input
+          <Input.Password
             status=""
+            type="password"
             className="welcome_input"
-            // value={paidby}
-            // onChange={(event) => {
-            //   setPaidby(event.target.value);
-            // }}
+            value={password}
+            onChange={(event) => {
+              setpassword(event.target.value);
+            }}
             placeholder="Password"
           />{" "}
           {!signup && (
-            <Input
+            <Input.Password
+              type="password"
               status=""
               className="welcome_input"
-              // value={paidby}
-              // onChange={(event) => {
-              //   setPaidby(event.target.value);
-              // }}
+              value={confrimpassword}
+              onChange={(event) => {
+                setconfrimpassword(event.target.value);
+              }}
               placeholder="Confrim Password"
             />
           )}
@@ -64,7 +160,7 @@ const Page = () => {
               key="submit"
               type="primary"
               // loading={loading}
-              // onClick={handleUpdate}
+              onClick={logIn}
               className="add_update"
             >
               Log in
@@ -74,7 +170,7 @@ const Page = () => {
               key="submit"
               type="primary"
               // loading={loading}
-              // onClick={handleOk}
+              onClick={signUp}
               className="add_update"
             >
               {" "}
@@ -87,6 +183,10 @@ const Page = () => {
               <span
                 className="sign_log"
                 onClick={() => {
+                  setName("");
+                  setemail("");
+                  setpassword("");
+                  setconfrimpassword("");
                   setSignup(!signup);
                 }}
               >
@@ -99,6 +199,10 @@ const Page = () => {
               <span
                 className="sign_log"
                 onClick={() => {
+                  setName("");
+                  setemail("");
+                  setpassword("");
+                  setconfrimpassword("");
                   setSignup(!signup);
                 }}
               >
