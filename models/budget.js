@@ -6,6 +6,10 @@ const BudgetSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userid: {
+      type: String,
+      required: true,
+    },
     amount: {
       type: Number,
       required: true,

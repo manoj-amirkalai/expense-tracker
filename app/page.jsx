@@ -4,20 +4,24 @@ import "./page.css";
 import logo from "@/assets/logo.png";
 import Image from "next/image";
 import { Button, Input, message } from "antd";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const [signup, setSignup] = useState(false);
+  const route = useRouter();
+  const [signup, setSignup] = useState(true);
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [confrimpassword, setconfrimpassword] = useState("");
 
   const logIn = async () => {
+    const token = localStorage.getItem("token");
     try {
       const res = await fetch("http://localhost:3000/api/user/", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           email: email,
@@ -32,11 +36,13 @@ const Page = () => {
       }
       if (res.ok === true) {
         message.success("Logged In");
-
-        setName("");
-        setemail("");
-        setpassword("");
-        setconfrimpassword("");
+        const data = await res.json();
+        route.push("/dashboard");
+        localStorage.setItem("token", data.token);
+        // setName("");
+        // setemail("");
+        // setpassword("");
+        // setconfrimpassword("");
       }
     } catch (e) {
       console.log(e);
@@ -70,7 +76,7 @@ const Page = () => {
       return;
     }
     if (!/^[^s@]+@[^s@]+.[^s@]+$/.test(email)) {
-    return  message.error("Invalid Email");
+      return message.error("Invalid Email");
     }
     if (password !== confrimpassword) {
       return message.error("Credentials Not matching");
@@ -92,7 +98,10 @@ const Page = () => {
         message.error("Email already Registered");
       }
       if (res.status === 201) {
+        const data = await res.json();
+        localStorage.setItem("token", data.token);
         message.success("Account created");
+        route.push("/dashboard");
 
         setName("");
         setemail("");

@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 import profile from "@/assets/profile.png";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const route = useRouter();
+  const [token, settoken] = useState(localStorage.getItem("token"));
+  useEffect(() => {
+    if (!token) {
+      route.push("/");
+    }
+  }, [token]);
   return (
     <>
       <div className="navbar">
@@ -33,6 +41,10 @@ const Navbar = () => {
           width={50}
           height={50}
           alt="profile"
+          onClick={() => {
+            localStorage.setItem("token", "");
+            settoken("");
+          }}
         />
       </div>
       {/* <span className="theme">

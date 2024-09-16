@@ -3,7 +3,6 @@ import Budget from "@/models/budget";
 import { NextResponse } from "next/server";
 export async function GET(request, { params }) {
   const { id } = params;
-  console.log(id);
   connectMongoDB();
   try {
     await connectMongoDB();
@@ -19,7 +18,6 @@ export async function PUT(request, { params }) {
   const { paidby, amount, paidfor, paidusing, datetime, category } =
     await request.json();
   const { id } = params;
-  console.log(id);
   connectMongoDB();
   try {
     await connectMongoDB();

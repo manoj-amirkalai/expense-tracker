@@ -29,7 +29,15 @@ import { Radio } from "antd";
 import { IoAddCircle } from "react-icons/io5";
 import dayjs from "dayjs";
 import Navbar from "../Components/Navbar/Navbar";
+import { useRouter } from "next/navigation";
 const Page = () => {
+  const route=useRouter()
+  const token = localStorage.getItem("token");
+  if(!token){
+    route.push('/')
+  }
+  console.log(token);
+  
   const [data, setData] = useState([]);
   const [paidfor, setPaidfor] = useState("");
   const [paidby, setPaidby] = useState("");
@@ -47,7 +55,12 @@ const Page = () => {
   let count = 0;
   const getdata = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/budget");
+      const response = await axios.get("http://localhost:3000/api/budget", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const fetcheddata = response.data.response;
       setData([...fetcheddata]);
     } catch (e) {
@@ -106,7 +119,6 @@ const Page = () => {
     columnHelper.accessor(
       (row) => {
         const dateandtime = new Date(row.datetime).toString().slice(0, 25);
-        console.log(typeof dateandtime.slice(0, 15));
 
         return <p>{dateandtime.slice(4, 15)}</p>;
       },
@@ -319,6 +331,7 @@ const Page = () => {
     }
     setLoading(true);
 
+    const token = localStorage.getItem("token");
     try {
       const res = await fetch(
         `http://localhost:3000/api/budget`,
@@ -327,6 +340,7 @@ const Page = () => {
           method: "POST",
           headers: {
             "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             paidfor: paidfor,

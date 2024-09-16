@@ -8,9 +8,16 @@ import { useEffect, useState } from "react";
 import { Input } from "antd";
 import axios from "axios";
 import Navbar from "../Components/Navbar/Navbar";
+import { useRouter } from "next/navigation";
 const { Search } = Input;
 
 export default function Home() {
+  const route = useRouter();
+  const token = localStorage.getItem("token");
+  if (!token) {
+    route.push("/");
+  }
+
   const [year, setYear] = useState(2024);
   const [janExp, setJanExp] = useState(0);
   const [febEXP, setfebEXP] = useState(0);
@@ -39,7 +46,12 @@ export default function Home() {
   const [transactions, settransactions] = useState([]);
   const getdata = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/budget");
+      const response = await axios.get("http://localhost:3000/api/budget", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const fetcheddata = response.data.response;
       settransactions([...fetcheddata]);
     } catch (e) {
