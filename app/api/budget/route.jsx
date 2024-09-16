@@ -8,15 +8,13 @@ export async function POST(request) {
     await request.json();
   let id = "";
   const token = request.headers.get("Authorization")?.replace("Bearer ", "");
-  console.log("token", token);
+  
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Access the ID from the decoded token
     id = decoded.id;
-    console.log(id);
   } catch (error) {
-    console.log(error);
     res.json({ success: false, message: "error" });
   }
   try {
@@ -39,16 +37,14 @@ export async function POST(request) {
 export async function GET(request) {
   let id = "";
   const token = request.headers.get("Authorization")?.replace("Bearer ", "");
-  console.log(token);
+
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Access the ID from the decoded token
     id = decoded.id;
-    console.log(id);
   } catch (error) {
-    console.log(error);
     res.json({ success: false, message: "error" });
   }
 

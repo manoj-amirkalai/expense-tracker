@@ -8,6 +8,12 @@ import { useRouter } from "next/navigation";
 
 const Page = () => {
   const route = useRouter();
+  const token = localStorage.getItem("token") || false;
+  if (token) {
+    route.push("/dashboard");
+  } else {
+    route.push("/");
+  }
   const [signup, setSignup] = useState(true);
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
@@ -15,7 +21,6 @@ const Page = () => {
   const [confrimpassword, setconfrimpassword] = useState("");
 
   const logIn = async () => {
-    const token = localStorage.getItem("token");
     try {
       const res = await fetch("http://localhost:3000/api/user/", {
         method: "PUT",
@@ -39,10 +44,10 @@ const Page = () => {
         const data = await res.json();
         route.push("/dashboard");
         localStorage.setItem("token", data.token);
-        // setName("");
-        // setemail("");
-        // setpassword("");
-        // setconfrimpassword("");
+        setName("");
+        setemail("");
+        setpassword("");
+        setconfrimpassword("");
       }
     } catch (e) {
       console.log(e);
@@ -75,9 +80,14 @@ const Page = () => {
 
       return;
     }
-    if (!/^[^s@]+@[^s@]+.[^s@]+$/.test(email)) {
-      return message.error("Invalid Email");
-    }
+    // function isValidEmail(email) {
+    //   // Basic regex for email validation
+    //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //   return re.test(email);
+    // }
+    // if (isValidEmail(email)) {
+    //   return message.error("Invalid Email");
+    // }
     if (password !== confrimpassword) {
       return message.error("Credentials Not matching");
     }
@@ -91,7 +101,6 @@ const Page = () => {
           name: name,
           email: email,
           password: password,
-          confrimpassword: confrimpassword,
         }),
       });
       if (res.status === 500) {

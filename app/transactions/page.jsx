@@ -31,13 +31,13 @@ import dayjs from "dayjs";
 import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 const Page = () => {
-  const route=useRouter()
+  const route = useRouter();
   const token = localStorage.getItem("token");
-  if(!token){
-    route.push('/')
+  if (!token) {
+    route.push("/");
+    message.info("Please Login to Continue");
   }
-  console.log(token);
-  
+
   const [data, setData] = useState([]);
   const [paidfor, setPaidfor] = useState("");
   const [paidby, setPaidby] = useState("");

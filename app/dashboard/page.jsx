@@ -5,7 +5,7 @@ import { BsGraphDownArrow } from "react-icons/bs";
 import { BsGraphUpArrow } from "react-icons/bs";
 import ApexCharts from "react-apexcharts";
 import { useEffect, useState } from "react";
-import { Input } from "antd";
+import { Input, message } from "antd";
 import axios from "axios";
 import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,7 @@ export default function Home() {
   const token = localStorage.getItem("token");
   if (!token) {
     route.push("/");
+    message.info("Please Login to Continue")
   }
 
   const [year, setYear] = useState(2024);
@@ -59,7 +60,9 @@ export default function Home() {
     }
   };
   useEffect(() => {
-    getdata();
+    if(token){
+      getdata();
+    }
   }, []);
 
   const [transactionsFiltered, setTransactionsFiltered] = useState([]);
