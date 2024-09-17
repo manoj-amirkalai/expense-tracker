@@ -13,17 +13,16 @@ import axios from "axios";
 import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 const { Search } = Input;
-
 import React from "react";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "../Components/store/store";
 const Dashboard = () => {
   
   const route = useRouter();
-  const tokens =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
+  
+  const tokens = useSelector((state) => state.data.token);
+   
     const [token, settoken] = useState(tokens);
-  // const token = useSelector((state) => state.data.token);
   useEffect(() => {
     if (!token) {
       route.push("/");

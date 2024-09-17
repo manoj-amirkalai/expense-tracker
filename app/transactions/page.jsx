@@ -30,24 +30,19 @@ import { IoAddCircle } from "react-icons/io5";
 import dayjs from "dayjs";
 import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "../Components/store/store";
 const Transaction = () => {
   const route = useRouter();
-  const tokens =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
+
+  const tokens = useSelector((state) => state.data.token);
+
   const [token, settoken] = useState(tokens);
   useEffect(() => {
     if (!token) {
       route.push("/");
     }
   }, [token]);
-
-  // const token = useSelector((state) => state.data.token);
-  // if (!token) {
-  //   route.push("/");
-  //   message.info("Please Login to Continue");
-  // }
 
   const [data, setData] = useState([]);
   const [paidfor, setPaidfor] = useState("");
