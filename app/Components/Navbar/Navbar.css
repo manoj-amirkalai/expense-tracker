@@ -14,6 +14,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 40px;
 }
 .nav_item {
   text-decoration: none !important;
@@ -41,15 +42,36 @@
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+  width: 17%;
+  height: 17%;
 }
 .profile_box {
   position: absolute;
   width: max-content;
-  bottom:  20;
+  bottom: 20;
   right: 0;
-  background-color: aqua;padding: 10px;
+  background-color: aqua;
+  padding: 10px;
 }
-.profile_box_main{
+.profile_box_main {
   position: relative;
   margin-right: 50px;
+}
+
+@media screen and (max-width: 1000px) {
+  .navbar{
+    width: 90vw;}
+}
+@media screen and (max-width: 500px) {
+  
+.nav_item {
+  font-size: 2vw;
+  margin-left: -70px;
+}.navbar{
+  display: flex;
+  padding: 5px;
+  border-radius: 10px;
+}.profile{
+  width: 12%;
+}
 }

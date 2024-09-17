@@ -5,18 +5,11 @@ import logo from "@/assets/logo.png";
 import Link from "next/link";
 
 const Navbar = () => {
-
   return (
     <>
       <div className="navbar">
         <Link href="/">
-          <Image
-            className="profile"
-            src={logo}
-            width={50}
-            height={50}
-            alt="logo"
-          />
+          <Image className="profile" src={logo} alt="logo" />
         </Link>{" "}
         <div className="nav_items">
           <Link className="nav_item" href="/dashboard">
@@ -28,9 +21,7 @@ const Navbar = () => {
           <Link className="nav_item" href="/transactions">
             Transactions
           </Link>
-        </div>
-        <div className="profile_box_main">
-       
+
           <Link className="nav_item" href="/profile">
             Profile
           </Link>
