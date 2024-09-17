@@ -3,10 +3,10 @@ import styles from "./page.module.css";
 import { FaWallet } from "react-icons/fa6";
 import { BsGraphDownArrow } from "react-icons/bs";
 import { BsGraphUpArrow } from "react-icons/bs";
-import ApexCharts from "react-apexcharts";
+// import ApexCharts from "react-apexcharts";
 
-// import dynamic from "next/dynamic";
-// const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
+import dynamic from "next/dynamic";
+const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
 import { useEffect, useState } from "react";
 import { Input, message } from "antd";
 import axios from "axios";
