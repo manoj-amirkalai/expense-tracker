@@ -5,13 +5,16 @@ import Navbar from "../Components/Navbar/Navbar";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import store from "../Components/store/store";
+import { setToken } from "../Components/store/reducer";
 
 const Page = () => {
+  const dispatch=useDispatch()
+  const tokens = useSelector((state) => state.data.token);
   const [data, setData] = useState({});
   const route = useRouter();
-  const [token, settoken] = useState(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY"
-  );
+  const [token, settoken] = useState(tokens);
   useEffect(() => {
     if (!token) {
       route.push("/");
@@ -35,9 +38,7 @@ const Page = () => {
   useEffect(() => {
     getdata();
   }, [token]);
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+
   return (
     <>
       <Navbar />
@@ -58,6 +59,8 @@ const Page = () => {
             </Button>
             <Button
               onClick={() => {
+                dispatch(setToken(""))
+                route.push("/")
                 settoken("");
               }}
             >
@@ -70,4 +73,12 @@ const Page = () => {
   );
 };
 
-export default Page;
+const page = () => {
+  return (
+    <Provider store={store}>
+      <Page />
+    </Provider>
+  );
+};
+
+export default page;

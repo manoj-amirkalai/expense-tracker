@@ -34,10 +34,11 @@ export async function PUT(request) {
   try {
     await connectMongoDB();
     const response = await User.findOne({ email: email });
-    if (!(response.password === password)) {
+    const isMatch = await bcrypt.compare(password, response.password);
+    if (!isMatch) {
       return NextResponse.json({ message: "Password Wrong" }, { status: 404 });
     }
-    if (response.password === password) {
+    if (isMatch) {
       return NextResponse.json(
         { message: "Logged In", token: createToken(response._id) },
         { status: 200 }
@@ -53,7 +54,7 @@ export async function PUT(request) {
 export async function GET(request) {
   let id = "";
   const token = request.headers.get("Authorization")?.replace("Bearer ", "");
-  console.log(token);
+
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -63,8 +64,6 @@ export async function GET(request) {
   } catch (error) {
     res.json({ success: false, message: "error" });
   }
-  console.log(id);
-
   try {
     await connectMongoDB();
     const response = await User.findById({ _id: id });

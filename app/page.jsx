@@ -1,19 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./page.css";
 import logo from "@/assets/logo.png";
 import Image from "next/image";
 import { Button, Input, message } from "antd";
 import { useRouter } from "next/navigation";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import { setToken } from "./Components/store/reducer";
+import store from "./Components/store/store";
 
-const Page = () => {
+const LogSign = () => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.data.token);
   const route = useRouter();
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
   if (token) {
     route.push("/dashboard");
-  } else {
-    route.push("/");
-  }
+  } 
+ 
   const [signup, setSignup] = useState(true);
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
@@ -22,7 +25,7 @@ const Page = () => {
 
   const logIn = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/user/", {
+      const res = await fetch("http://localhost:3000/api/user", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +44,9 @@ const Page = () => {
       }
       if (res.ok === true) {
         message.success("Logged In");
+        
         const data = await res.json();
+        dispatch(setToken(data.token));
         route.push("/dashboard");
         setName("");
         setemail("");
@@ -79,15 +84,15 @@ const Page = () => {
 
       return;
     }
-  
-    if (!email.endsWith("@gmail.com") || email.length<12) {
+
+    if (!email.endsWith("@gmail.com") || email.length < 12) {
       return message.error("Invalid Email");
     }
     if (password !== confrimpassword) {
       return message.error("Credentials Not matching");
     }
     try {
-      const res = await fetch("http://localhost:3000/api/user/", {
+      const res = await fetch("http://localhost:3000/api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,6 +110,7 @@ const Page = () => {
         const data = await res.json();
         message.success("Account created");
         route.push("/dashboard");
+        dispatch(setToken(data.token));
 
         setName("");
         setemail("");
@@ -229,4 +235,12 @@ const Page = () => {
   );
 };
 
-export default Page;
+const page = () => {
+  return (
+    <Provider store={store}>
+      <LogSign />
+    </Provider>
+  );
+};
+
+export default page;
