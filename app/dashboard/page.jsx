@@ -6,7 +6,7 @@ import { BsGraphUpArrow } from "react-icons/bs";
 // import ApexCharts from "react-apexcharts";
 
 import dynamic from "next/dynamic";
-const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
+const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { useEffect, useState } from "react";
 import { Input, message } from "antd";
 import axios from "axios";
@@ -14,11 +14,21 @@ import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 const { Search } = Input;
 
-const Page = () => {
+import React from "react";
+import { Provider } from "react-redux";
+import store from "../Components/store/store";
+const Dashboard = () => {
+  
   const route = useRouter();
-  const token =
+  const tokens =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
- 
+    const [token, settoken] = useState(tokens);
+  // const token = useSelector((state) => state.data.token);
+  useEffect(() => {
+    if (!token) {
+      route.push("/");
+    }
+  }, [token]);
 
   const [year, setYear] = useState(2024);
   const [janExp, setJanExp] = useState(0);
@@ -534,4 +544,13 @@ const Page = () => {
     </>
   );
 };
-export default Page;
+
+const page = () => {
+  return (
+    <Provider store={store}>
+      <Dashboard />
+    </Provider>
+  );
+};
+
+export default page;

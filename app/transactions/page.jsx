@@ -30,14 +30,24 @@ import { IoAddCircle } from "react-icons/io5";
 import dayjs from "dayjs";
 import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
-const Page = () => {
+import { Provider } from "react-redux";
+import store from "../Components/store/store";
+const Transaction = () => {
   const route = useRouter();
-  const token =
+  const tokens =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
-  if (!token) {
-    route.push("/");
-    message.info("Please Login to Continue");
-  }
+  const [token, settoken] = useState(tokens);
+  useEffect(() => {
+    if (!token) {
+      route.push("/");
+    }
+  }, [token]);
+
+  // const token = useSelector((state) => state.data.token);
+  // if (!token) {
+  //   route.push("/");
+  //   message.info("Please Login to Continue");
+  // }
 
   const [data, setData] = useState([]);
   const [paidfor, setPaidfor] = useState("");
@@ -426,7 +436,6 @@ const Page = () => {
     <>
       {" "}
       <Navbar />{" "}
-     
       <div className="transaction_data">
         <Modal open={open} onCancel={handleCancel} footer={[]}>
           <h2>Add Transaction</h2>
@@ -548,4 +557,12 @@ const Page = () => {
   );
 };
 
-export default Page;
+const page = () => {
+  return (
+    <Provider store={store}>
+      <Transaction />
+    </Provider>
+  );
+};
+
+export default page;

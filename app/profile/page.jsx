@@ -12,9 +12,9 @@ import { setToken } from "../Components/store/reducer";
 const Page = () => {
   const dispatch=useDispatch()
   const tokens = useSelector((state) => state.data.token);
+  const [token, settoken] = useState(tokens);
   const [data, setData] = useState({});
   const route = useRouter();
-  const [token, settoken] = useState(tokens);
   useEffect(() => {
     if (!token) {
       route.push("/");
