@@ -10,6 +10,8 @@
   display: grid;
   grid-template-columns: 80% 20%;
   border-radius: 20px;
+  position: relative;
+  z-index: -2;
 }
 .dashboard_chart {
   border-radius: 20px 0 0 20px;

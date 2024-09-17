@@ -37,8 +37,19 @@
   color: var(--text-color);
   cursor: pointer;
 }
-.profile{
+.profile {
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+}
+.profile_box {
+  position: absolute;
+  width: max-content;
+  bottom:  20;
+  right: 0;
+  background-color: aqua;padding: 10px;
+}
+.profile_box_main{
+  position: relative;
+  margin-right: 50px;
 }

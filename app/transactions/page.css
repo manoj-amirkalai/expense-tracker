@@ -2,6 +2,7 @@
   width: 81vw;
   margin: 0 auto;
   position: relative;
+  z-index: -2;
 }
 td {
   text-align: center;
@@ -75,10 +76,6 @@ tbody tr {
 }
 
 .add_button {
-  position: absolute;
-  top: 0.5%;
-  right: 140px;
-  z-index: 2;
   transform: scale(0.7);
 }
 .add_inputs {

@@ -2,7 +2,20 @@ import User from "@/models/user";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
-  const { id } = await request.json();
+  let id = "";
+  const token = request.headers.get("Authorization")?.replace("Bearer ", "");
+console.log(token);
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Access the ID from the decoded token
+    id = decoded.id;
+  } catch (error) {
+    res.json({ success: false, message: "error" });
+  }
+  console.log(id);
+  
   try {
     await connectMongoDB();
     const response = await User.findById({ _id: id });

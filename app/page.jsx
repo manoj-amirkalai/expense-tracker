@@ -80,14 +80,10 @@ const Page = () => {
 
       return;
     }
-    // function isValidEmail(email) {
-    //   // Basic regex for email validation
-    //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //   return re.test(email);
-    // }
-    // if (isValidEmail(email)) {
-    //   return message.error("Invalid Email");
-    // }
+  
+    if (!email.endsWith("@gmail.com") || email.length<12) {
+      return message.error("Invalid Email");
+    }
     if (password !== confrimpassword) {
       return message.error("Credentials Not matching");
     }

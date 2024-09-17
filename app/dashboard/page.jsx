@@ -16,7 +16,7 @@ export default function Home() {
   const token = localStorage.getItem("token");
   if (!token) {
     route.push("/");
-    message.info("Please Login to Continue")
+    message.info("Please Login to Continue");
   }
 
   const [year, setYear] = useState(2024);
@@ -60,7 +60,7 @@ export default function Home() {
     }
   };
   useEffect(() => {
-    if(token){
+    if (token) {
       getdata();
     }
   }, []);
@@ -393,7 +393,7 @@ export default function Home() {
       {
         name: "Income",
         data: [
-          janInc / 1000,
+          ,
           febInc / 1000,
           marInc / 1000,
           aprInc / 1000,
@@ -410,13 +410,13 @@ export default function Home() {
     ],
     options: {
       chart: {
-        type: "bar",
+        type: "line",
       },
       plotOptions: {
         bar: {
           horizontal: false,
+          borderRadius: 10,
           columnWidth: "85%",
-          endingShape: "rounded",
         },
       },
       dataLabels: {
@@ -455,7 +455,7 @@ export default function Home() {
       tooltip: {
         y: {
           formatter: function (val) {
-            return "Rs." + val + "k";
+            return "Rs." + val * 1000;
           },
         },
       },

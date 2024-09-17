@@ -290,6 +290,10 @@ const Page = () => {
         >
           Export Selected Rows
         </Button>
+        <Button className="add_button" onClick={showModal} variant="outlined">
+          {/* <IoAddCircle className="add_icon" /> */}
+          <p className="add_icon"> Add Transactions</p>
+        </Button>
       </Box>
     ),
   });
@@ -536,10 +540,7 @@ const Page = () => {
           </div>
         </Modal>
         <MaterialReactTable table={table} />
-        <Button className="add_button" onClick={showModal} variant="outlined">
-          {/* <IoAddCircle className="add_icon" /> */}
-          <p className="add_icon"> Add Transactions</p>
-        </Button>
+     
       </div>
     </>
   );

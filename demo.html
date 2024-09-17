@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <style>
+    #chart-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .chart {
+      width: 45%;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Expense Tracker Dashboard</h1>
+  <div id="chart-container">
+    <div id="expense-breakdown" class="chart"></div>
+    <div id="budget-comparison" class="chart"></div>
+    <div id="recent-transactions" class="chart"></div>
+  </div>
+
+  <script>
+    // Sample data
+    var expenseData = {
+      categories: ['Food', 'Entertainment', 'Utilities', 'Others'],
+      values: [500, 200, 300, 100]
+    };
+
+    var budgetData = {
+      categories: ['Food', 'Entertainment', 'Utilities'],
+      budgeted: [600, 250, 350],
+      actual: [500, 200, 300]
+    };
+
+    var optionsExpenseBreakdown = {
+      chart: {
+        type: 'donut'
+      },
+      series: expenseData.values,
+      labels: expenseData.categories,
+      title: {
+        text: 'Expense Breakdown'
+      }
+    };
+
+    var optionsBudgetComparison = {
+      chart: {
+        type: 'bar'
+      },
+      series: [{
+        name: 'Budgeted',
+        data: budgetData.budgeted
+      }, {
+        name: 'Actual',
+        data: budgetData.actual
+      }],
+      xaxis: {
+        categories: budgetData.categories
+      },
+      title: {
+        text: 'Budget vs Actual'
+      }
+    };
+
+    var chartExpenseBreakdown = new ApexCharts(document.querySelector("#expense-breakdown"), optionsExpenseBreakdown);
+    var chartBudgetComparison = new ApexCharts(document.querySelector("#budget-comparison"), optionsBudgetComparison);
+
+    chartExpenseBreakdown.render();
+    chartBudgetComparison.render();
+  </script>
+</body>
+</html>
