@@ -56,12 +56,15 @@ const Dashboard = () => {
   const [transactions, settransactions] = useState([]);
   const getdata = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/budget", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "https://budget-tracker-manoj.onrender.com/api/budget",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const fetcheddata = response.data.response;
       settransactions([...fetcheddata]);
     } catch (e) {

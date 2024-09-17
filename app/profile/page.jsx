@@ -21,13 +21,16 @@ const Page = () => {
   }, [token]);
   const getdata = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://budget-tracker-manoj.onrender.com/api/user",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const profiledata = await response.json();
 
       setData(profiledata.message);
