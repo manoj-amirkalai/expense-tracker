@@ -1,8 +1,6 @@
 .transaction_data {
   width: 81vw;
   margin: 0 auto;
-  position: relative;
-  z-index: -2;
 }
 td {
   text-align: center;

@@ -9,7 +9,9 @@ import axios from "axios";
 const Page = () => {
   const [data, setData] = useState({});
   const route = useRouter();
-  const [token, settoken] = useState(localStorage.getItem("token"));
+  const [token, settoken] = useState(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY"
+  );
   useEffect(() => {
     if (!token) {
       route.push("/");
@@ -47,7 +49,7 @@ const Page = () => {
           </p>
           <p>
             Email: <span>{data.email}</span>
-          </p> 
+          </p>
 
           <div>
             {" "}
@@ -56,7 +58,6 @@ const Page = () => {
             </Button>
             <Button
               onClick={() => {
-                localStorage.setItem("token", "");
                 settoken("");
               }}
             >

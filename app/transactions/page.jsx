@@ -32,7 +32,8 @@ import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 const Page = () => {
   const route = useRouter();
-  const token = localStorage.getItem("token");
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
   if (!token) {
     route.push("/");
     message.info("Please Login to Continue");
@@ -335,7 +336,8 @@ const Page = () => {
     }
     setLoading(true);
 
-    const token = localStorage.getItem("token");
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
     try {
       const res = await fetch(
         `http://localhost:3000/api/budget`,
@@ -423,7 +425,11 @@ const Page = () => {
   return (
     <>
       {" "}
-      <Navbar />
+      <Navbar />{" "}
+      <Button className="add_button" onClick={showModal} variant="outlined">
+        {/* <IoAddCircle className="add_icon" /> */}
+        <p className="add_icon"> Add Transactions</p>
+      </Button>
       <div className="transaction_data">
         <Modal open={open} onCancel={handleCancel} footer={[]}>
           <h2>Add Transaction</h2>
@@ -540,7 +546,6 @@ const Page = () => {
           </div>
         </Modal>
         <MaterialReactTable table={table} />
-     
       </div>
     </>
   );

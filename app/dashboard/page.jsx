@@ -4,6 +4,9 @@ import { FaWallet } from "react-icons/fa6";
 import { BsGraphDownArrow } from "react-icons/bs";
 import { BsGraphUpArrow } from "react-icons/bs";
 import ApexCharts from "react-apexcharts";
+
+// import dynamic from "next/dynamic";
+// const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
 import { useEffect, useState } from "react";
 import { Input, message } from "antd";
 import axios from "axios";
@@ -11,13 +14,11 @@ import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 const { Search } = Input;
 
-export default function Home() {
+const Page = () => {
   const route = useRouter();
-  const token = localStorage.getItem("token");
-  if (!token) {
-    route.push("/");
-    message.info("Please Login to Continue");
-  }
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
+ 
 
   const [year, setYear] = useState(2024);
   const [janExp, setJanExp] = useState(0);
@@ -393,7 +394,7 @@ export default function Home() {
       {
         name: "Income",
         data: [
-          ,
+          janInc / 1000,
           febInc / 1000,
           marInc / 1000,
           aprInc / 1000,
@@ -532,4 +533,5 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+export default Page;

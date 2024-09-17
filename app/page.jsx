@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const Page = () => {
   const route = useRouter();
-  const token = localStorage.getItem("token") || false;
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
   if (token) {
     route.push("/dashboard");
   } else {
@@ -43,7 +43,6 @@ const Page = () => {
         message.success("Logged In");
         const data = await res.json();
         route.push("/dashboard");
-        localStorage.setItem("token", data.token);
         setName("");
         setemail("");
         setpassword("");
@@ -104,7 +103,6 @@ const Page = () => {
       }
       if (res.status === 201) {
         const data = await res.json();
-        localStorage.setItem("token", data.token);
         message.success("Account created");
         route.push("/dashboard");
 
