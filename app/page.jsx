@@ -15,8 +15,8 @@ const LogSign = () => {
   const route = useRouter();
   if (token) {
     route.push("/dashboard");
-  } 
- 
+  }
+
   const [signup, setSignup] = useState(true);
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
@@ -25,17 +25,20 @@ const LogSign = () => {
 
   const logIn = async () => {
     try {
-      const res = await fetch("https://money-tracker-2c20.onrender.com/api/user", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
+      const res = await fetch(
+        "https://budget-tracker-manoj.onrender.comapi/user",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
+      );
 
       if (res.ok === false) {
         message.error("Credentials not Matching");
@@ -44,7 +47,7 @@ const LogSign = () => {
       }
       if (res.ok === true) {
         message.success("Logged In");
-        
+
         const data = await res.json();
         dispatch(setToken(data.token));
         route.push("/dashboard");
@@ -92,17 +95,20 @@ const LogSign = () => {
       return message.error("Credentials Not matching");
     }
     try {
-      const res = await fetch("https://money-tracker-2c20.onrender.com/api/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          password: password,
-        }),
-      });
+      const res = await fetch(
+        "https://budget-tracker-manoj.onrender.comapi/user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+          }),
+        }
+      );
       if (res.status === 500) {
         message.error("Email already Registered");
       }

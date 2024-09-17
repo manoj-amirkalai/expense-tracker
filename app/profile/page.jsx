@@ -9,7 +9,7 @@ import store from "../Components/store/store";
 import { setToken } from "../Components/store/reducer";
 
 const Page = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const tokens = useSelector((state) => state.data.token);
   const [token, settoken] = useState(tokens);
   const [data, setData] = useState({});
@@ -21,15 +21,18 @@ const Page = () => {
   }, [token]);
   const getdata = async () => {
     try {
-      const response = await fetch("https://money-tracker-2c20.onrender.com/api/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://budget-tracker-manoj.onrender.comapi/user",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const profiledata = await response.json();
-      
+
       setData(profiledata.message);
     } catch (e) {
       console.log(e);
@@ -59,8 +62,8 @@ const Page = () => {
             </Button>
             <Button
               onClick={() => {
-                dispatch(setToken(""))
-                route.push("/")
+                dispatch(setToken(""));
+                route.push("/");
                 settoken("");
               }}
             >
