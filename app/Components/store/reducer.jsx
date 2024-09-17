@@ -1,8 +1,8 @@
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  token: "",
-  //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY
+  token: typeof window !== 'undefined' ? localStorage.getItem("token") || "" : "",
 };
 
 const dataSlice = createSlice({
@@ -10,7 +10,10 @@ const dataSlice = createSlice({
   initialState,
   reducers: {
     setToken(state, action) {
+      console.log(action.payload);
+      
       state.token = action.payload;
+      localStorage.setItem("token", state.token);
     },
   },
 });

@@ -4,7 +4,6 @@ import "./page.css";
 import Navbar from "../Components/Navbar/Navbar";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "../Components/store/store";
 import { setToken } from "../Components/store/reducer";
@@ -30,6 +29,8 @@ const Page = () => {
         },
       });
       const profiledata = await response.json();
+      console.log(profiledata);
+      
       setData(profiledata.message);
     } catch (e) {
       console.log(e);

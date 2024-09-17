@@ -7,19 +7,21 @@ export async function POST(request) {
   const { paidby, amount, paidfor, paidusing, datetime, category } =
     await request.json();
   let id = "";
+
   const token = request.headers.get("Authorization")?.replace("Bearer ", "");
-  
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Access the ID from the decoded token
     id = decoded.id;
+    console.log(id);
   } catch (error) {
     res.json({ success: false, message: "error" });
   }
   try {
     await connectMongoDB();
-    await Budget.create({
+    const response = await Budget.create({
       paidfor: paidfor,
       amount: amount,
       paidby: paidby,
@@ -28,6 +30,7 @@ export async function POST(request) {
       category: category,
       userid: id,
     });
+    console.log(response);
 
     return NextResponse.json({ message: "success" }, { status: 201 });
   } catch (e) {
@@ -38,12 +41,12 @@ export async function GET(request) {
   let id = "";
   const token = request.headers.get("Authorization")?.replace("Bearer ", "");
 
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Access the ID from the decoded token
     id = decoded.id;
+    console.log(id);
   } catch (error) {
     res.json({ success: false, message: "error" });
   }
@@ -51,6 +54,8 @@ export async function GET(request) {
   try {
     await connectMongoDB();
     const response = await Budget.find({ userid: id });
+
+    console.log(response);
 
     return NextResponse.json({ response: response }, { status: 201 });
   } catch (e) {
