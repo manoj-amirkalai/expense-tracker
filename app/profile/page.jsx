@@ -22,7 +22,7 @@ const Page = () => {
   const getdata = async () => {
     try {
       const response = await fetch(
-        "https://budget-tracker-manoj.onrender.comapi/user",
+        "https://budget-tracker-manoj.onrender.com/api/user",
         {
           method: "GET",
           headers: {

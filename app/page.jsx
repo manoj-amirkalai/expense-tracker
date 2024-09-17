@@ -26,7 +26,7 @@ const LogSign = () => {
   const logIn = async () => {
     try {
       const res = await fetch(
-        "https://budget-tracker-manoj.onrender.comapi/user",
+        "https://budget-tracker-manoj.onrender.com/api/user",
         {
           method: "PUT",
           headers: {
@@ -96,7 +96,7 @@ const LogSign = () => {
     }
     try {
       const res = await fetch(
-        "https://budget-tracker-manoj.onrender.comapi/user",
+        "https://budget-tracker-manoj.onrender.com/api/user",
         {
           method: "POST",
           headers: {

@@ -57,7 +57,7 @@ const Dashboard = () => {
   const getdata = async () => {
     try {
       const response = await axios.get(
-        "https://budget-tracker-manoj.onrender.comapi/budget",
+        "https://budget-tracker-manoj.onrender.com/api/budget",
         {
           headers: {
             "Content-Type": "application/json",
