@@ -426,10 +426,7 @@ const Page = () => {
     <>
       {" "}
       <Navbar />{" "}
-      <Button className="add_button" onClick={showModal} variant="outlined">
-        {/* <IoAddCircle className="add_icon" /> */}
-        <p className="add_icon"> Add Transactions</p>
-      </Button>
+     
       <div className="transaction_data">
         <Modal open={open} onCancel={handleCancel} footer={[]}>
           <h2>Add Transaction</h2>
