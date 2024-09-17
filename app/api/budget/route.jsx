@@ -15,7 +15,6 @@ export async function POST(request) {
 
     // Access the ID from the decoded token
     id = decoded.id;
-    console.log(id);
   } catch (error) {
     res.json({ success: false, message: "error" });
   }
@@ -30,7 +29,6 @@ export async function POST(request) {
       category: category,
       userid: id,
     });
-    console.log(response);
 
     return NextResponse.json({ message: "success" }, { status: 201 });
   } catch (e) {
@@ -46,7 +44,6 @@ export async function GET(request) {
 
     // Access the ID from the decoded token
     id = decoded.id;
-    console.log(id);
   } catch (error) {
     res.json({ success: false, message: "error" });
   }
@@ -55,7 +52,6 @@ export async function GET(request) {
     await connectMongoDB();
     const response = await Budget.find({ userid: id });
 
-    console.log(response);
 
     return NextResponse.json({ response: response }, { status: 201 });
   } catch (e) {

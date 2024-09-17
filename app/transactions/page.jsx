@@ -341,9 +341,7 @@ const Transaction = () => {
     }
     setLoading(true);
 
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
-    try {
+  try {
       const res = await fetch(
         `https://money-tracker-2c20.onrender.com/api/budget`,
 

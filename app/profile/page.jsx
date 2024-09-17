@@ -29,7 +29,6 @@ const Page = () => {
         },
       });
       const profiledata = await response.json();
-      console.log(profiledata);
       
       setData(profiledata.message);
     } catch (e) {

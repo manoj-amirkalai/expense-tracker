@@ -10,7 +10,6 @@ const dataSlice = createSlice({
   initialState,
   reducers: {
     setToken(state, action) {
-      console.log(action.payload);
       
       state.token = action.payload;
       localStorage.setItem("token", state.token);
