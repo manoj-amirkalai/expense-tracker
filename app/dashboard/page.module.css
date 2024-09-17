@@ -72,10 +72,11 @@
 
 @media screen and (max-width: 1000px) {
   .dashboard {
-    width: 90vw;
-    display: flex;
+    width: 85vw;
+    height: 88vh;
+    display: flex;justify-content: center !important;
     padding: 10px;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .dashboard_expinc {
     display: flex !important;
@@ -87,6 +88,7 @@
   .dashboard_expense,
   .dashboard_income {
     font-size: 20px;
+    border-radius:10px ;
   }
   .yearsearch {
     width: 70%;
@@ -134,9 +136,13 @@
   .dashboard_expense span:first-child,
   .dashboard_income span:first-child {
     font-size: 10px;
-  }.dashboard_expinc{
-    margin-top: -50px;
+  }
+  .dashboard_expinc {
     gap: 5px;
     justify-content: none;
+  }
+
+  .dashboard {
+    flex-direction: column;
   }
 }

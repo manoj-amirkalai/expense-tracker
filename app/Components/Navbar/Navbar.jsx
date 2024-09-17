@@ -9,7 +9,7 @@ const Navbar = () => {
     <>
       <div className="navbar">
         <Link href="/">
-          <Image className="profile" src={logo} alt="logo" />
+          <Image className="profile" src={logo} alt="logo" width={50} height={50} />
         </Link>{" "}
         <div className="nav_items">
           <Link className="nav_item" href="/dashboard">

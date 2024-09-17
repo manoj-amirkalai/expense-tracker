@@ -42,8 +42,6 @@
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
-  width: 17%;
-  height: 17%;
 }
 .profile_box {
   position: absolute;
@@ -59,19 +57,21 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .navbar{
-    width: 90vw;}
+  .navbar {
+    width: 87vw;
+  }
 }
 @media screen and (max-width: 500px) {
-  
-.nav_item {
-  font-size: 2vw;
-  margin-left: -70px;
-}.navbar{
-  display: flex;
-  padding: 5px;
-  border-radius: 10px;
-}.profile{
-  width: 12%;
-}
+  .nav_item {
+    font-size: 2vw;
+    margin-left: -70px;
+  }
+  .navbar {
+    display: flex;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  .profile {
+    width: 12%;
+  }
 }
