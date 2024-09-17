@@ -57,7 +57,7 @@ const Dashboard = () => {
   const [transactions, settransactions] = useState([]);
   const getdata = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/budget", {
+      const response = await axios.get("https://money-tracker-2c20.onrender.com/api/budget", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

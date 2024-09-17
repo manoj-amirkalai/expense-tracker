@@ -61,7 +61,7 @@ const Transaction = () => {
   let count = 0;
   const getdata = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/budget", {
+      const response = await axios.get("https://money-tracker-2c20.onrender.com/api/budget", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -168,7 +168,7 @@ const Transaction = () => {
                 const { _id } = row;
                 try {
                   const response = await axios.get(
-                    `http://localhost:3000/api/budget/${_id}`
+                    `https://money-tracker-2c20.onrender.com/api/budget/${_id}`
                   );
                   const responsedata = response.data.response;
 
@@ -194,7 +194,7 @@ const Transaction = () => {
 
                 try {
                   const res = await fetch(
-                    `http://localhost:3000/api/budget`,
+                    `https://money-tracker-2c20.onrender.com/api/budget`,
 
                     {
                       method: "DELETE",
@@ -345,7 +345,7 @@ const Transaction = () => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTkxYTY1ZjNiMTM5NmYxY2JlMzlmNCIsImlhdCI6MTcyNjU1MjY3N30.MjfZNgbzNmGwngQG_W_jrN9EAVpn9NraiJQgIw8o2qY";
     try {
       const res = await fetch(
-        `http://localhost:3000/api/budget`,
+        `https://money-tracker-2c20.onrender.com/api/budget`,
 
         {
           method: "POST",
@@ -397,7 +397,7 @@ const Transaction = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/budget/${updateId}`,
+        `https://money-tracker-2c20.onrender.com/api/budget/${updateId}`,
 
         {
           method: "PUT",

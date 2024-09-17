@@ -21,7 +21,7 @@ const Page = () => {
   }, [token]);
   const getdata = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/user", {
+      const response = await fetch("https://money-tracker-2c20.onrender.com/api/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

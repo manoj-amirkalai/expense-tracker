@@ -25,7 +25,7 @@ const LogSign = () => {
 
   const logIn = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/user", {
+      const res = await fetch("https://money-tracker-2c20.onrender.com/api/user", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const LogSign = () => {
       return message.error("Credentials Not matching");
     }
     try {
-      const res = await fetch("http://localhost:3000/api/user", {
+      const res = await fetch("https://money-tracker-2c20.onrender.com/api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
