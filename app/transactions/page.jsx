@@ -60,12 +60,15 @@ const Transaction = () => {
   let count = 0;
   const getdata = async () => {
     try {
-      const response = await axios.get("https://budget-tracker-manoj.onrender.com/api/budget", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "https://budget-tracker-manoj.onrender.com/api/budget",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const fetcheddata = response.data.response;
       setData([...fetcheddata]);
     } catch (e) {
@@ -415,6 +418,7 @@ const Transaction = () => {
       setPaidby("");
       setPaidfor("");
       setPaidusing("");
+      setUpdateModel(false);
       setDateTime(dayjs(new Date()));
       setCategory("");
       setAmount(0);
