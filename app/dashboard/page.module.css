@@ -135,24 +135,32 @@
 }
 @media screen and (max-width: 1400px) {
   .dashboard_expinc {
-    margin-top: 68vh;
+    margin-top: 98vh;
   }
   .dashboard {
-    height: 90vh;
+    height: 120vh;
   }
 }
 @media screen and (max-width: 1000px) {
   .dashboard_expinc {
-    margin-top: 40vh;
+    margin-top: 95vh !important;
   }
 
   .yearsearch {
     width: 880px;
     margin-left: 30px;
   }
-}
-@media screen and (max-width: 1000px) {
+}@media screen and (max-width: 800px) {
   .dashboard_expinc {
-    margin-top: 70vh;
+    margin-top: 72vh !important;
+  }
+
+  .yearsearch {
+    width: 880px;
+    margin-left: 30px;
+  }.dashboard{
+    height: 88vh;
   }
 }
+
+
