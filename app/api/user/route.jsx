@@ -62,7 +62,7 @@ export async function GET(request) {
     // Access the ID from the decoded token
     id = decoded.id;
   } catch (error) {
-    res.json({ success: false, message: "error" });
+   return NextResponse.json({ success: false, message: "error" });
   }
   try {
     await connectMongoDB();
