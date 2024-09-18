@@ -1,0 +1,47 @@
+.profile_container {
+  height: 88vh;
+  width: 81vw;
+  margin: 10px auto;
+  background-color: var(--bg-nav);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+}
+.profile_info {
+  width: max-content;
+  border-radius: 20px;
+  height: max-content;
+  padding: 20px;
+  margin-top: 20px;
+  backdrop-filter: blur(5px);
+  background-color: rgba(240, 255, 255, 0.849);
+}
+.profile_info h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.profile_info p {
+  margin: 5px auto;
+  display: grid;
+  gap: 10px;
+  color: var(--text-color);
+  grid-template-columns: 40% 40%;
+}
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.buttons Button:nth-child(2) {
+  color: white;
+  backdrop-filter: blur(5px);
+  background-color: rgba(212, 13, 13, 0.582);
+}
+.spin {
+  margin:10px 45%;
+  
+}
