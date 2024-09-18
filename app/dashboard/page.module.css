@@ -15,7 +15,7 @@
   border-radius: 20px 0 0 20px;
   width: 100%;
   height: 100%;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 .dashboard_expinc {
   border-radius: 0 20px 20px 0;
@@ -81,6 +81,7 @@
 @media screen and (max-width: 1500px) {
   .dashboard_chart {
     width: 100%;
+    margin-top: 0px;
   }
   .dashboard {
     flex-direction: column !important;
@@ -96,13 +97,13 @@
     border-radius: 10px;
     width: 150px;
     height: 100px;
+    margin-top: 20px;
   }
   .dashboard_expinc {
     display: flex;
-    margin-top: 60%;
+    margin-top: 62%;
     flex-direction: row;
     gap: 10px;
-    margin-left: -250px;
     justify-content: space-around;
     width: 100%;
     margin-left: 0px;
@@ -132,31 +133,26 @@
     margin-left: 50px;
   }
 }
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
   .dashboard_expinc {
-    margin-top: 55vh;
+    margin-top: 68vh;
   }
   .dashboard {
-    height: 75vh;
+    height: 90vh;
   }
 }
 @media screen and (max-width: 1000px) {
   .dashboard_expinc {
     margin-top: 40vh;
   }
-  .dashboard {
-    height: 65vh;
-  }
+
   .yearsearch {
     width: 880px;
     margin-left: 30px;
   }
 }
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1000px) {
   .dashboard_expinc {
-    margin-top: 30vh;
-  }
-  .dashboard {
-    height: 60vh;
+    margin-top: 70vh;
   }
 }

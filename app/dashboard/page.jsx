@@ -16,6 +16,7 @@ const { Search } = Input;
 import React from "react";
 import { Provider, useSelector } from "react-redux";
 import store from "../Components/store/store";
+import CountUp from "react-countup";
 const Dashboard = () => {
   const route = useRouter();
 
@@ -56,15 +57,12 @@ const Dashboard = () => {
   const [transactions, settransactions] = useState([]);
   const getdata = async () => {
     try {
-      const response = await axios.get(
-        "https://budget-tracker-manoj.onrender.com/api/budget",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get("https://budget-tracker-manoj.onrender.com/api/budget", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const fetcheddata = response.data.response;
       settransactions([...fetcheddata]);
     } catch (e) {
@@ -525,19 +523,25 @@ const Dashboard = () => {
               <span>
                 <FaWallet />
               </span>{" "}
-              <span>{balance}</span>
+              <span>
+                <CountUp start={0} end={balance} duration={3} delay={0} />
+              </span>
             </div>
             <div className={styles.dashboard_income}>
               <span>
                 <BsGraphUpArrow />
               </span>{" "}
-              <span>{incomeTotal}</span>
+              <span>
+                <CountUp start={0} end={incomeTotal} duration={3} delay={0} />
+              </span>
             </div>
             <div className={styles.dashboard_expense}>
               <span>
                 <BsGraphDownArrow />{" "}
               </span>
-              <span>{expenseTotal}</span>
+              <span>
+                <CountUp start={0} end={expenseTotal} duration={3} delay={0} />
+              </span>
             </div>
           </div>
         </div>

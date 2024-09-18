@@ -15,7 +15,6 @@ import "./page.css";
 import { Box, Button } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { mkConfig, generateCsv, download } from "export-to-csv"; // or use your library of choice here
-import { LuEye } from "react-icons/lu";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { useEffect, useState } from "react";
@@ -61,15 +60,12 @@ const Transaction = () => {
   let count = 0;
   const getdata = async () => {
     try {
-      const response = await axios.get(
-        "https://budget-tracker-manoj.onrender.com/api/budget",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get("https://budget-tracker-manoj.onrender.com/api/budget", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const fetcheddata = response.data.response;
       setData([...fetcheddata]);
     } catch (e) {
