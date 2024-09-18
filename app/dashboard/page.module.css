@@ -69,80 +69,94 @@
   width: 90%;
   margin: 0 auto;
 }
-
-@media screen and (max-width: 1000px) {
-  .dashboard {
-    width: 85vw;
-    height: 88vh;
-    display: flex;justify-content: center !important;
-    padding: 10px;
-    flex-direction: column;
-  }
-  .dashboard_expinc {
-    display: flex !important;
-    flex-direction: row;
-    align-items: center !important;
-    justify-content: space-around;
-  }
-  .dashboard_balance,
-  .dashboard_expense,
-  .dashboard_income {
-    font-size: 20px;
-    border-radius:10px ;
-  }
-  .yearsearch {
-    width: 70%;
-    height: 20%;
-    margin-top: -2%;
-  }
-  .dashboard_balance,
-  .dashboard_expense,
-  .dashboard_income {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 5px;
-
-    width: 50%;
-    height: 50px;
-  }
-  .dashboard_balance span:first-child,
-  .dashboard_expense span:first-child,
-  .dashboard_income span:first-child {
-    font-size: 20px;
+.dashboard_chart {
+  width: 65vw;
+}
+@media screen and (max-width: 2000px) {
+  .dashboard_chart {
+    width: 65vw;
+    height: 50px !important;
   }
 }
-@media screen and (max-width: 500px) {
-  .dashboard_balance,
-  .dashboard_expense,
-  .dashboard_income {
+@media screen and (max-width: 1500px) {
+  .dashboard_chart {
     width: 100%;
-    height: 32px;
-    border-radius: 5px;
   }
-
+  .dashboard {
+    flex-direction: column !important;
+    display: flex;
+    justify-content: center !important;
+    padding: 10px;
+    height: 88vh;
+  }
   .dashboard_balance,
   .dashboard_expense,
   .dashboard_income {
-    font-size: 10px;
-  }
-  .yearsearch {
-    width: 180% !important;
-    height: 10px !important;
-    margin-bottom: 15px;
-  }
-  .dashboard_balance span:first-child,
-  .dashboard_expense span:first-child,
-  .dashboard_income span:first-child {
-    font-size: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 150px;
+    height: 100px;
   }
   .dashboard_expinc {
-    gap: 5px;
-    justify-content: none;
+    display: flex;
+    margin-top: 60%;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: -250px;
+    justify-content: space-around;
+    width: 100%;
+    margin-left: 0px;
   }
-
+  .yearsearch {
+    width: 25%;
+    width: 20%;
+    margin-left: 230px;
+  }
+}
+@media screen and (max-width: 1500px) {
   .dashboard {
-    flex-direction: column;
+    height: 88vh;
+  }
+  .dashboard_balance,
+  .dashboard_expense,
+  .dashboard_income {
+    width: 1000px;
+    height: 100px;
+  }
+  .dashboard_expinc {
+    width: 100%;
+    margin-left: 0px;
+  }
+  .yearsearch {
+    width: 780px;
+    margin-left: 50px;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .dashboard_expinc {
+    margin-top: 55vh;
+  }
+  .dashboard {
+    height: 75vh;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .dashboard_expinc {
+    margin-top: 40vh;
+  }
+  .dashboard {
+    height: 65vh;
+  }
+  .yearsearch {
+    width: 880px;
+    margin-left: 30px;
+  }
+}
+@media screen and (max-width: 850px) {
+  .dashboard_expinc {
+    margin-top: 30vh;
+  }
+  .dashboard {
+    height: 60vh;
   }
 }

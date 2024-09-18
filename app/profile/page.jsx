@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "./page.css";
 import Navbar from "../Components/Navbar/Navbar";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import { useRouter } from "next/navigation";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "../Components/store/store";
@@ -48,14 +48,22 @@ const Page = () => {
       <div className="profile_container">
         <div className="profile_info">
           <h1>Profile</h1>
-          <p>
-            Username: <span>{data.name}</span>
-          </p>
-          <p>
-            Email: <span>{data.email}</span>
-          </p>
+          {data.name ? (
+            <>
+              <p>
+                <span> User name: </span>
+                <span>{data.name}</span>
+              </p>
+              <p>
+                <span>Email: </span>
+                <span>{data.email}</span>
+              </p>
+            </>
+          ) : (
+            <Spin className="spin" />
+          )}
 
-          <div>
+          <div className="buttons">
             {" "}
             <Button disabled type="primary">
               Edit Profile
