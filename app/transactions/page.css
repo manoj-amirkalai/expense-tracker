@@ -104,7 +104,7 @@ tbody tr {
   border: 1px solid red;
 }
 .export_option {
-  font-size: 0.6vw;
+  font-size: 0.6vw  !important;
 }
 @media screen and (max-width: 700px) {
   .transaction_data {
@@ -113,12 +113,12 @@ tbody tr {
 }
 @media screen and (max-width: 1500px) {
   .export_option {
-    font-size: 0.9vw;
+    font-size: 0.9vw  !important;
   }
 }
 @media screen and (max-width: 1000px) {
   .export_option {
-    font-size: 0.8vw;
+    font-size: 1vw !important;
   }.css-di3982 {
     transform: scale(0.8);
     margin: -5px -20px 0 0;
@@ -126,17 +126,17 @@ tbody tr {
 }
 @media screen and (max-width: 800px) {
   .export_option {
-    font-size: 1.2vw;
+    font-size: 1.2vw  !important;
   }
 }
 @media screen and (max-width: 600px) {
   .export_option {
-    font-size: 1.4vw;
+    font-size: 1.4vw !important;
   }
 }
 @media screen and (max-width: 450px) {
   .export_option {
-    font-size: 1.6vw;
+    font-size: 1.6vw !important;
     width: 50%;
   }
  
