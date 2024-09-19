@@ -40,6 +40,7 @@ const Transaction = () => {
   useEffect(() => {
     if (!token) {
       route.push("/");
+      message.info("Please Login");
     }
   }, [token]);
 
@@ -60,15 +61,12 @@ const Transaction = () => {
   let count = 0;
   const getdata = async () => {
     try {
-      const response = await axios.get(
-        "https://budget-tracker-manoj.onrender.com/api/budget",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get("https://budget-tracker-manoj.onrender.com/api/budget", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const fetcheddata = response.data.response;
       setData([...fetcheddata]);
     } catch (e) {
@@ -263,17 +261,23 @@ const Transaction = () => {
     positionToolbarAlertBanner: "bottom",
     renderTopToolbarCustomActions: ({ table }) => (
       <Box
-        sx={{
-          display: "flex",
-          gap: "16px",
-          padding: "8px",
-          flexWrap: "wrap",
-        }}
+      
+          className="export_options"
+      // sx={{
+      //   display: "flex",
+      //   gap: "16px",
+      //   padding: "8px",
+      //   flexWrap: "wrap",
+      // }}
       >
-        <Button onClick={handleExportData} startIcon={<FileDownloadIcon />}>
+        <Button
+          onClick={handleExportData}
+          className="export_option"
+          startIcon={<FileDownloadIcon />}
+        >
           Export All Data
         </Button>
-        <Button
+        {/* <Button
           disabled={table.getPrePaginationRowModel().rows.length === 0}
           onClick={() =>
             handleExportRows(table.getPrePaginationRowModel().rows)
@@ -288,8 +292,9 @@ const Transaction = () => {
           startIcon={<FileDownloadIcon />}
         >
           Export Page Rows
-        </Button>
+        </Button> */}
         <Button
+          className="export_option"
           disabled={
             !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
           }
@@ -298,9 +303,13 @@ const Transaction = () => {
         >
           Export Selected Rows
         </Button>
-        <Button className="add_button" onClick={showModal} variant="outlined">
+        <Button
+          onClick={showModal}
+          className="export_option"
+          variant="outlined"
+        >
           {/* <IoAddCircle className="add_icon" /> */}
-          <p className="add_icon"> Add Transactions</p>
+          Add Transactions
         </Button>
       </Box>
     ),
@@ -547,7 +556,9 @@ const Transaction = () => {
             )}
           </div>
         </Modal>
-        <MaterialReactTable table={table} />
+        <div className="report_table">
+          <MaterialReactTable table={table} />
+        </div>
       </div>
     </>
   );

@@ -100,6 +100,48 @@ tbody tr {
   display: flex;
   justify-content: center;
 }
-.category_border{
+.category_border {
   border: 1px solid red;
+}
+.export_option {
+  font-size: 0.6vw;
+}
+@media screen and (max-width: 700px) {
+  .transaction_data {
+    width: 96.5vw;
+  }
+}
+@media screen and (max-width: 1500px) {
+  .export_option {
+    font-size: 0.8vw;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .export_option {
+    font-size: 1vw;
+  }.css-di3982 {
+    transform: scale(0.8);
+    margin: -5px -20px 0 0;
+  }
+}
+@media screen and (max-width: 800px) {
+  .export_option {
+    font-size: 1.2vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  .export_option {
+    font-size: 1.4vw;
+  }
+}
+@media screen and (max-width: 450px) {
+  .export_option {
+    font-size: 1.6vw;
+    width: 50%;
+  }
+ 
+  .export_options {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

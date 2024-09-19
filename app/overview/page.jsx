@@ -15,6 +15,7 @@ const Page = () => {
   useEffect(() => {
     if (!token) {
       route.push("/");
+      message.info("Please Login")
     }
   }, [token]);
   const getdata = async () => {
