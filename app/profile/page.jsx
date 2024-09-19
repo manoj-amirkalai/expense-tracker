@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "./page.css";
 import Navbar from "../Components/Navbar/Navbar";
-import { Button, Spin } from "antd";
+import { Button, message, Spin } from "antd";
 import { useRouter } from "next/navigation";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "../Components/store/store";
@@ -49,7 +49,7 @@ const Page = () => {
           {data.name ? (
             <>
               <p>
-                <span> User name: </span>
+                <span>Name: </span>
                 <span>{data.name}</span>
               </p>
               <p>
