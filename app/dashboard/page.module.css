@@ -2,25 +2,25 @@
   height: max-content;
 }
 .dashboard {
-  height: 88vh;
+  height: max-content;
   width: 81vw;
   margin: 10px auto;
   background-color: var(--bg-nav);
   backdrop-filter: blur(5px);
-  display: grid;
-  grid-template-columns: 80% 20%;
+  display: flex;
+  flex-direction: row-reverse;
   border-radius: 20px;
+  padding: 10px 5px;
 }
 .dashboard_chart {
   border-radius: 20px 0 0 20px;
-  width: 100%;
+  width: 80%;
   height: 100%;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .dashboard_expinc {
   border-radius: 0 20px 20px 0;
-  width: 100%;
-  height: 100%;
+  width: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,103 +64,71 @@
 .dashboard_expense,
 .dashboard_income {
   font-size: 50px;
+  width: 80%;
 }
 .yearsearch {
   width: 90%;
-  margin: 0 auto;
 }
 .dashboard_chart {
   width: 65vw;
 }
-@media screen and (max-width: 2000px) {
-  .dashboard_chart {
-    width: 65vw;
-    height: 50px !important;
-  }
-}
 @media screen and (max-width: 1500px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+  }
   .dashboard_chart {
     width: 100%;
-    margin-top: 0px;
   }
-  .dashboard {
-    flex-direction: column !important;
+  .dashboard_expinc {
+    width: 100%;
     display: flex;
-    justify-content: center !important;
-    padding: 10px;
-    height: 88vh;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 12px;
+    justify-content: center;
+  }
+  .yearsearch {
+    width: 20%;
   }
   .dashboard_balance,
   .dashboard_expense,
   .dashboard_income {
-    font-size: 20px;
-    border-radius: 10px;
-    width: 150px;
-    height: 100px;
-    margin-top: 20px;
+    font-size: 30px;
+    width: 15%;
+    padding: 10px 0;
   }
+  .dashboard_balance span:first-child,
+  .dashboard_expense span:first-child,
+  .dashboard_income span:first-child {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+
   .dashboard_expinc {
-    display: flex;
-    margin-top: 62%;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: space-around;
     width: 100%;
-    margin-left: 0px;
+    display: flex;
+    flex-direction: row;
+    margin:20px 10px ;
+    gap: 12px;
+    justify-content: center;
   }
   .yearsearch {
     width: 25%;
-    width: 20%;
-    margin-left: 230px;
-  }
-}
-@media screen and (max-width: 1500px) {
-  .dashboard {
-    height: 88vh;
+  }.dashboard_chart{
+    margin-top: -10px;
   }
   .dashboard_balance,
   .dashboard_expense,
   .dashboard_income {
-    width: 1000px;
-    height: 100px;
-  }
-  .dashboard_expinc {
-    width: 100%;
-    margin-left: 0px;
-  }
-  .yearsearch {
-    width: 780px;
-    margin-left: 50px;
+    font-size: 30px;
+    width: 20%;
+    padding: 10px 0;
+  } .dashboard_balance span:first-child,
+  .dashboard_expense span:first-child,
+  .dashboard_income span:first-child {
+    font-size: 15px;
   }
 }
-@media screen and (max-width: 1400px) {
-  .dashboard_expinc {
-    margin-top: 98vh;
-  }
-  .dashboard {
-    height: 120vh;
-  }
-}
-@media screen and (max-width: 1000px) {
-  .dashboard_expinc {
-    margin-top: 95vh !important;
-  }
-
-  .yearsearch {
-    width: 880px;
-    margin-left: 30px;
-  }
-}@media screen and (max-width: 800px) {
-  .dashboard_expinc {
-    margin-top: 72vh !important;
-  }
-
-  .yearsearch {
-    width: 880px;
-    margin-left: 30px;
-  }.dashboard{
-    height: 88vh;
-  }
-}
-
-
