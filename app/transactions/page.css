@@ -137,6 +137,8 @@ tbody tr {
 @media screen and (max-width: 450px) {
   .export_option {
     font-size: 1.6vw !important;
+    width: 45%;
+  }.export_option:nth-child(2){
     width: 50%;
   }
  
