@@ -2,11 +2,9 @@
 import React, { useEffect, useState } from "react";
 import "./page.css";
 import Navbar from "../Components/Navbar/Navbar";
-import { Button, Spin } from "antd";
 import { useRouter } from "next/navigation";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "../Components/store/store";
-import { setToken } from "../Components/store/reducer";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -21,16 +19,13 @@ const Page = () => {
   }, [token]);
   const getdata = async () => {
     try {
-      const response = await fetch(
-        "https://budget-tracker-manoj.onrender.com/api/user",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch("https://budget-tracker-manoj.onrender.com/api/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const profiledata = await response.json();
 
       setData(profiledata.message);
@@ -45,9 +40,12 @@ const Page = () => {
   return (
     <>
       <Navbar />
-      <div className="profile_container">
-        <div className="profile_info">
-          <h4>This section is currently under development and will be available in the future. We apologize for any inconvenience this may cause.</h4>
+      <div className="overview_container">
+        <div className="overview_info">
+          <h4>
+            This section is currently under development and will be available in
+            the future. We apologize for any inconvenience this may cause.
+          </h4>
         </div>
       </div>
     </>

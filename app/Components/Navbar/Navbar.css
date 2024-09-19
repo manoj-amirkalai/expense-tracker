@@ -59,19 +59,23 @@
 @media screen and (max-width: 1000px) {
   .navbar {
     width: 80vw;
-  }
+  }.nav_item {
+    font-size: 2vw;}
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   .nav_item {
-    font-size: 2vw;
+    font-size: 2.5vw;
     margin-left: -70px;
   }
   .navbar {
     display: flex;
     padding: 5px;
+    width: 95%;
     border-radius: 10px;
   }
   .profile {
-    width: 12%;
+    width: 35%;
+    height:35%;
+    margin-left: 4%;
   }
 }

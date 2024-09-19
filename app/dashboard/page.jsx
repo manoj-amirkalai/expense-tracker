@@ -26,6 +26,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (!token) {
       route.push("/");
+      message.info("Please Login")
     }
   }, [token]);
 
