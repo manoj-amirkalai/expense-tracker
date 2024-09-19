@@ -113,12 +113,12 @@ tbody tr {
 }
 @media screen and (max-width: 1500px) {
   .export_option {
-    font-size: 0.8vw;
+    font-size: 0.9vw;
   }
 }
 @media screen and (max-width: 1000px) {
   .export_option {
-    font-size: 1vw;
+    font-size: 0.8vw;
   }.css-di3982 {
     transform: scale(0.8);
     margin: -5px -20px 0 0;

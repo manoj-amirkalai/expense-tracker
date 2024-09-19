@@ -135,6 +135,7 @@
 @media screen and (max-width: 700px) {
   .dashboard {
     width: 95vw;
+    border-radius: 10px;
   }
   .yearsearch {
     width: 30%;

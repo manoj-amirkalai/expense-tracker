@@ -261,21 +261,20 @@ const Transaction = () => {
     positionToolbarAlertBanner: "bottom",
     renderTopToolbarCustomActions: ({ table }) => (
       <Box
-      
-          className="export_options"
-      // sx={{
-      //   display: "flex",
-      //   gap: "16px",
-      //   padding: "8px",
-      //   flexWrap: "wrap",
-      // }}
+        className="export_options"
+        // sx={{
+        //   display: "flex",
+        //   gap: "16px",
+        //   padding: "8px",
+        //   flexWrap: "wrap",
+        // }}
       >
         <Button
           onClick={handleExportData}
           className="export_option"
           startIcon={<FileDownloadIcon />}
         >
-          Export All Data
+          All Data
         </Button>
         {/* <Button
           disabled={table.getPrePaginationRowModel().rows.length === 0}
@@ -300,8 +299,7 @@ const Transaction = () => {
           }
           onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
           startIcon={<FileDownloadIcon />}
-        >
-          Export Selected Rows
+        >Selected Data
         </Button>
         <Button
           onClick={showModal}
