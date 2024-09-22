@@ -5,7 +5,7 @@
 :root {
   --text-color: rgb(4, 75, 25);
   --bg-image: url("../assets/wt-bg.jpg");
-  --bg-nav: rgba(27, 78, 50, 0.24);
+  --bg-nav: #9db5b2;
   --report-head: rgba(4, 75, 25, 0.116);
   --report-hover: white;
 }

@@ -6,7 +6,6 @@
   width: 81vw;
   margin: 10px auto;
   background-color: var(--bg-nav);
-  backdrop-filter: blur(5px);
   display: flex;
   border-radius: 20px;
   padding: 10px 5px;
