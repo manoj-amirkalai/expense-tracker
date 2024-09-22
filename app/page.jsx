@@ -17,7 +17,7 @@ const LogSign = () => {
     route.push("/dashboard");
   }
 
-  const [signup, setSignup] = useState(true);
+  const [signup, setSignup] = useState(false);
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -130,112 +130,107 @@ const LogSign = () => {
   return (
     <div className="welcome_container">
       <div className="page">
-        <div className="welcome_logo">
-          <Image className="welcome_profile" src={logo} alt="logo" />
-        </div>
-        <div className="welcome_board">
-          {" "}
-          <h1 className="welcome">welcome to Budget Tracker</h1>{" "}
-          {!signup && (
-            <Input
-              status=""
-              className="welcome_input"
-              value={name}
-              onChange={(event) => {
-                setName(event.target.value);
-              }}
-              placeholder="Enter your name"
-            />
-          )}
+        <Image className="welcome_profile" src={logo} alt="logo" />{" "}
+        <h1 className="welcome">welcome to Budget Tracker</h1>{" "}
+        {!signup && (
           <Input
             status=""
             className="welcome_input"
-            value={email}
-            type="email"
+            value={name}
             onChange={(event) => {
-              setemail(event.target.value);
+              setName(event.target.value);
             }}
-            placeholder="E-mail"
-          />{" "}
+            placeholder="Enter your name"
+          />
+        )}
+        <Input
+          status=""
+          className="welcome_input"
+          value={email}
+          type="email"
+          onChange={(event) => {
+            setemail(event.target.value);
+          }}
+          placeholder="E-mail"
+        />{" "}
+        <Input.Password
+          status=""
+          type="password"
+          className="welcome_input"
+          value={password}
+          onChange={(event) => {
+            setpassword(event.target.value);
+          }}
+          placeholder="Password"
+        />{" "}
+        {!signup && (
           <Input.Password
-            status=""
             type="password"
+            status=""
             className="welcome_input"
-            value={password}
+            value={confrimpassword}
             onChange={(event) => {
-              setpassword(event.target.value);
+              setconfrimpassword(event.target.value);
             }}
-            placeholder="Password"
-          />{" "}
-          {!signup && (
-            <Input.Password
-              type="password"
-              status=""
-              className="welcome_input"
-              value={confrimpassword}
-              onChange={(event) => {
-                setconfrimpassword(event.target.value);
+            placeholder="Confrim Password"
+          />
+        )}
+        {signup ? (
+          <Button
+            key="submit"
+            type="primary"
+            // loading={loading}
+            onClick={logIn}
+            className="log_sign"
+          >
+            Log in
+          </Button>
+        ) : (
+          <Button
+            key="submit"
+            type="primary"
+            // loading={loading}
+            onClick={signUp}
+            className="log_sign"
+          >
+            {" "}
+            Sign Up
+          </Button>
+        )}
+        {signup ? (
+          <p className="sign_log_message">
+            Already have a account ?{" "}
+            <span
+              className="sign_log"
+              onClick={() => {
+                setName("");
+                setemail("");
+                setpassword("");
+                setconfrimpassword("");
+                setSignup(!signup);
               }}
-              placeholder="Confrim Password"
-            />
-          )}
-          {signup ? (
-            <Button
-              key="submit"
-              type="primary"
-              // loading={loading}
-              onClick={logIn}
-              className="add_update"
             >
-              Log in
-            </Button>
-          ) : (
-            <Button
-              key="submit"
-              type="primary"
-              // loading={loading}
-              onClick={signUp}
-              className="add_update"
+              Sign Up
+            </span>
+          </p>
+        ) : (
+          <p className="sign_log_message">
+            New User ?{" "}
+            <span
+              className="sign_log"
+              onClick={() => {
+                setName("");
+                setemail("");
+                setpassword("");
+                setconfrimpassword("");
+                setSignup(!signup);
+              }}
             >
               {" "}
-              Sign Up
-            </Button>
-          )}
-          {signup ? (
-            <p>
-              Already have a account ?{" "}
-              <span
-                className="sign_log"
-                onClick={() => {
-                  setName("");
-                  setemail("");
-                  setpassword("");
-                  setconfrimpassword("");
-                  setSignup(!signup);
-                }}
-              >
-                Sign Up
-              </span>
-            </p>
-          ) : (
-            <p>
-              New User ?{" "}
-              <span
-                className="sign_log"
-                onClick={() => {
-                  setName("");
-                  setemail("");
-                  setpassword("");
-                  setconfrimpassword("");
-                  setSignup(!signup);
-                }}
-              >
-                {" "}
-                Log In{" "}
-              </span>
-            </p>
-          )}
-        </div>
+              Log In{" "}
+            </span>
+          </p>
+        )}
       </div>
     </div>
   );
