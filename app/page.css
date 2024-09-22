@@ -20,13 +20,14 @@
 .welcome {
   margin: 10px 0;
   text-align: center;
+  color: var(--text-color);
 }
 .welcome_input {
   width: 70% !important;
   margin: 0 0 10px 15%;
 }
 .log_sign {
-  margin: 10px 0 10px 42%;
+  margin: 10px 0 10px 38%;
 }
 .sign_log_message {
   text-align: center;

@@ -17,7 +17,7 @@ const LogSign = () => {
     route.push("/dashboard");
   }
 
-  const [signup, setSignup] = useState(false);
+  const [signup, setSignup] = useState(true);
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
