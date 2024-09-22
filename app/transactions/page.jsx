@@ -58,15 +58,18 @@ const Transaction = () => {
   const [paidusingerror, setPaidusingerror] = useState("");
   const [categoryerror, setCategoryerror] = useState("");
   const [amounterror, setAmounterror] = useState(0);
-  let count = 0;
+  let count = 1;
   const getdata = async () => {
     try {
-      const response = await axios.get("https://budget-tracker-manoj.onrender.com/api/budget", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "https://budget-tracker-manoj.onrender.com/api/budget",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const fetcheddata = response.data.response;
       setData([...fetcheddata]);
     } catch (e) {
@@ -97,8 +100,7 @@ const Transaction = () => {
   const columns = [
     columnHelper.accessor(
       () => {
-        count++;
-        return count;
+        return count++;
       },
       {
         header: "ID",
@@ -299,7 +301,8 @@ const Transaction = () => {
           }
           onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
           startIcon={<FileDownloadIcon />}
-        >Selected Data
+        >
+          Selected Data
         </Button>
         <Button
           onClick={showModal}

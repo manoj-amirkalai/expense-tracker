@@ -26,7 +26,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (!token) {
       route.push("/");
-      message.info("Please Login")
+      message.info("Please Login");
     }
   }, [token]);
 
@@ -58,12 +58,15 @@ const Dashboard = () => {
   const [transactions, settransactions] = useState([]);
   const getdata = async () => {
     try {
-      const response = await axios.get("https://budget-tracker-manoj.onrender.com/api/budget", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "https://budget-tracker-manoj.onrender.com/api/budget",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const fetcheddata = response.data.response;
       settransactions([...fetcheddata]);
     } catch (e) {
@@ -386,7 +389,8 @@ const Dashboard = () => {
     series: [
       {
         name: "Expense",
-        data: [0,
+        data: [
+          0,
           janExp / 1000,
           febEXP / 1000,
           marExp / 1000,
@@ -398,7 +402,8 @@ const Dashboard = () => {
           sepExp / 1000,
           octExp / 1000,
           novExp / 1000,
-          decExp / 1000,0
+          decExp / 1000,
+          0,
         ],
       },
       {
@@ -417,7 +422,7 @@ const Dashboard = () => {
           octInc / 1000,
           novInc / 1000,
           decInc / 1000,
-          0
+          0,
         ],
       },
     ],
@@ -455,7 +460,7 @@ const Dashboard = () => {
           "Oct",
           "Nov",
           "Dec",
-          ""
+          "",
         ],
       },
       colors: ["#9b0705", "#0c663c"],

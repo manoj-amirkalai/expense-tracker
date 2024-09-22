@@ -24,13 +24,13 @@ td {
   font-size: 15px;
 }
 .action_icons:last-child {
-  color: rgb(192, 35, 35);
+  color: rgba(192, 35, 35, 0.671);
 }
 .action_icons:first-child {
   color: green;
 }
 .action_icons:nth-child(1) {
-  color: blue;
+  color: rgba(0, 0, 255, 0.479);
 }
 .report_table {
   margin: 0 auto;
@@ -41,7 +41,7 @@ td {
   backdrop-filter: blur(7px) !important;
 }
 tbody tr:hover {
-  backdrop-filter: blur(7px) !important;
+  backdrop-filter: blur(10px) !important;
 }
 td,
 .css-1tbggly,
@@ -50,21 +50,9 @@ td,
   background-color: var(--bg-nav) !important;
   backdrop-filter: blur(5px) !important;
 }
-.css-lgq4l5-MuiPaper-root,
-tr {
-  background-color: transparent;
-}
-.css-hsi95o-MuiTableRow-root {
-  background-color: transparent !important;
-}
-.css-118e0ip-MuiTableHead-root,
-tbody tr {
-  backdrop-filter: blur(5px) !important;
-}
 
 .css-apge8j-MuiTableRow-root {
-  background-color: var(--report-head) !important;
-  backdrop-filter: blur(5px) !important;
+  background-color: var(--bg-nav) !important;
 }
 .css-1apkmlw-MuiButtonBase-root-MuiButton-root {
   color: black !important;
@@ -104,7 +92,7 @@ tbody tr {
   border: 1px solid red;
 }
 .export_option {
-  font-size: 0.6vw  !important;
+  font-size: 0.6vw !important;
 }
 @media screen and (max-width: 700px) {
   .transaction_data {
@@ -113,20 +101,21 @@ tbody tr {
 }
 @media screen and (max-width: 1500px) {
   .export_option {
-    font-size: 0.9vw  !important;
+    font-size: 0.9vw !important;
   }
 }
 @media screen and (max-width: 1000px) {
   .export_option {
     font-size: 1vw !important;
-  }.css-di3982 {
+  }
+  .css-di3982 {
     transform: scale(0.8);
     margin: -5px -20px 0 0;
   }
 }
 @media screen and (max-width: 800px) {
   .export_option {
-    font-size: 1.2vw  !important;
+    font-size: 1.2vw !important;
   }
 }
 @media screen and (max-width: 600px) {
@@ -138,10 +127,11 @@ tbody tr {
   .export_option {
     font-size: 1.6vw !important;
     width: 45%;
-  }.export_option:nth-child(2){
+  }
+  .export_option:nth-child(2) {
     width: 50%;
   }
- 
+
   .export_options {
     display: flex;
     flex-wrap: wrap;
