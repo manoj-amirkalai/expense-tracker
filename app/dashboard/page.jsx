@@ -386,7 +386,7 @@ const Dashboard = () => {
     series: [
       {
         name: "Expense",
-        data: [
+        data: [0,
           janExp / 1000,
           febEXP / 1000,
           marExp / 1000,
@@ -398,12 +398,13 @@ const Dashboard = () => {
           sepExp / 1000,
           octExp / 1000,
           novExp / 1000,
-          decExp / 1000,
+          decExp / 1000,0
         ],
       },
       {
         name: "Income",
         data: [
+          0,
           janInc / 1000,
           febInc / 1000,
           marInc / 1000,
@@ -416,12 +417,13 @@ const Dashboard = () => {
           octInc / 1000,
           novInc / 1000,
           decInc / 1000,
+          0
         ],
       },
     ],
     options: {
       chart: {
-        type: "line",
+        type: "area",
       },
       plotOptions: {
         bar: {
@@ -440,6 +442,7 @@ const Dashboard = () => {
       },
       xaxis: {
         categories: [
+          "",
           "Jan",
           "Feb",
           "Mar",
@@ -452,12 +455,13 @@ const Dashboard = () => {
           "Oct",
           "Nov",
           "Dec",
+          ""
         ],
       },
-      colors: ["#da5552", "#37a572"],
+      colors: ["#9b0705", "#0c663c"],
       yaxis: {
         title: {
-          text: "Rs(k)",
+          text: "₹(k)",
         },
       },
       fill: {
@@ -466,7 +470,7 @@ const Dashboard = () => {
       tooltip: {
         y: {
           formatter: function (val) {
-            return "Rs." + val * 1000;
+            return "₹" + val * 1000;
           },
         },
       },
@@ -508,7 +512,7 @@ const Dashboard = () => {
               className={styles.chart}
               options={data.options}
               series={data.series}
-              type="bar"
+              type="area"
               height={800}
             />
           </div>
