@@ -21,6 +21,7 @@ const Dashboard = () => {
   const route = useRouter();
 
   const tokens = useSelector((state) => state.data.token);
+  const fetcheddata = useSelector((state) => state.data.fetcheddata);
 
   const [token, settoken] = useState(tokens);
   useEffect(() => {
@@ -56,26 +57,10 @@ const Dashboard = () => {
   const [novInc, setnovInc] = useState(0);
   const [decInc, setdecInc] = useState(0);
   const [transactions, settransactions] = useState([]);
-  const getdata = async () => {
-    try {
-      const response = await axios.get(
-        "https://budget-tracker-manoj.onrender.com/api/budget",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const fetcheddata = response.data.response;
-      settransactions([...fetcheddata]);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+
   useEffect(() => {
     if (token) {
-      getdata();
+      settransactions([...fetcheddata]);
     }
   }, []);
 

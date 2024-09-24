@@ -35,6 +35,7 @@ const Transaction = () => {
   const route = useRouter();
 
   const tokens = useSelector((state) => state.data.token);
+  const fetcheddata = useSelector((state) => state.data.fetcheddata);
 
   const [token, settoken] = useState(tokens);
   useEffect(() => {
@@ -59,25 +60,8 @@ const Transaction = () => {
   const [categoryerror, setCategoryerror] = useState("");
   const [amounterror, setAmounterror] = useState(0);
   let count = 1;
-  const getdata = async () => {
-    try {
-      const response = await axios.get(
-        "https://budget-tracker-manoj.onrender.com/api/budget",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const fetcheddata = response.data.response;
-      setData([...fetcheddata]);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    getdata();
+
+  useEffect(() => {    setData([...fetcheddata]);
   }, []);
   const columnHelper = createMRTColumnHelper();
   const errorCheck = () => {

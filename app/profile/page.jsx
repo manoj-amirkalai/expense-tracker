@@ -11,6 +11,7 @@ import { setToken } from "../Components/store/reducer";
 const Page = () => {
   const dispatch = useDispatch();
   const tokens = useSelector((state) => state.data.token);
+  const profile = useSelector((state) => state.data.profile);
   const [token, settoken] = useState(tokens);
   const [data, setData] = useState({});
   const route = useRouter();
@@ -19,28 +20,7 @@ const Page = () => {
       route.push("/");
       message.info("Please Login");
     }
-  }, [token]);
-  const getdata = async () => {
-    try {
-      const response = await fetch(
-        "https://budget-tracker-manoj.onrender.com/api/user",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const profiledata = await response.json();
-
-      setData(profiledata.message);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    getdata();
+    setData(profile);
   }, [token]);
 
   return (
