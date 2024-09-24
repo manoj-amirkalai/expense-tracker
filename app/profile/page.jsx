@@ -29,7 +29,7 @@ const Page = () => {
       <div className="profile_container">
         <div className="profile_info">
           <h1>Profile</h1>
-          {data.name ? (
+          {data && data.name ? (
             <>
               <p>
                 <span>Name: </span>
