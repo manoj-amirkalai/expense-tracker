@@ -31,6 +31,7 @@ import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
 import { Provider, useSelector } from "react-redux";
 import store from "../Components/store/store";
+import { FaPlus } from "react-icons/fa6";
 const Transaction = () => {
   const route = useRouter();
 
@@ -61,7 +62,8 @@ const Transaction = () => {
   const [amounterror, setAmounterror] = useState(0);
   let count = 1;
 
-  useEffect(() => {    setData([...fetcheddata]);
+  useEffect(() => {
+    setData([...fetcheddata]);
   }, []);
   const columnHelper = createMRTColumnHelper();
   const errorCheck = () => {
@@ -82,15 +84,15 @@ const Transaction = () => {
     }
   };
   const columns = [
-    columnHelper.accessor(
-      () => {
-        return count++;
-      },
-      {
-        header: "ID",
-        size: 15,
-      }
-    ),
+    // columnHelper.accessor(
+    //   () => {
+    //     return count++;
+    //   },
+    //   {
+    //     header: "ID",
+    //     size: 15,
+    //   }
+    // ),
     columnHelper.accessor("paidfor", {
       header: "Paid For",
       size: 15,
@@ -111,8 +113,48 @@ const Transaction = () => {
     columnHelper.accessor(
       (row) => {
         const dateandtime = new Date(row.datetime).toString().slice(0, 25);
-
-        return <p>{dateandtime.slice(4, 15)}</p>;
+        const data = dateandtime.slice(4, 15);
+        // const month = dateandtime.slice(4, 7);
+        // let monthno = 0;
+        // switch (month) {
+        //   case "Jan":
+        //     monthno = 1;
+        //     break;
+        //   case "Feb":
+        //     monthno = 2;
+        //     break;
+        //   case "Mar":
+        //     monthno = 3;
+        //     break;
+        //   case "Apr":
+        //     monthno = 4;
+        //     break;
+        //   case "May":
+        //     monthno = 5;
+        //     break;
+        //   case "Jun":
+        //     monthno = 6;
+        //     break;
+        //   case "Jul":
+        //     monthno = 7;
+        //     break;
+        //   case "Aug":
+        //     monthno = 8;
+        //     break;
+        //   case "Sep":
+        //     monthno = 9;
+        //     break;
+        //   case "Oct":
+        //     monthno = 10;
+        //     break;
+        //   case "Nov":
+        //     monthno = 11;
+        //     break;
+        //   case "Dec":
+        //     monthno = 12;
+        //     break;
+        // }
+        return <p>{data}</p>;
       },
       {
         header: "Date",
@@ -288,13 +330,9 @@ const Transaction = () => {
         >
           Selected Data
         </Button>
-        <Button
-          onClick={showModal}
-          className="export_option"
-          variant="outlined"
-        >
+        <Button onClick={showModal} className="add_option " variant="">
           {/* <IoAddCircle className="add_icon" /> */}
-          Add Transactions
+          <FaPlus /> &nbsp; Add Transactions
         </Button>
       </Box>
     ),

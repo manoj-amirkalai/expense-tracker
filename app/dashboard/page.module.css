@@ -9,6 +9,7 @@
   display: flex;
   border-radius: 20px;
   padding: 10px 5px;
+  box-shadow: 0px 15px 30px 0px rgb(48, 46, 46);
 }
 .dashboard_chart {
   border-radius: 20px 0 0 20px;
