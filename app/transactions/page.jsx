@@ -29,15 +29,16 @@ import { IoAddCircle } from "react-icons/io5";
 import dayjs from "dayjs";
 import Navbar from "../Components/Navbar/Navbar";
 import { useRouter } from "next/navigation";
-import { Provider, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "../Components/store/store";
 import { FaPlus } from "react-icons/fa6";
+import { setFetcheddata } from "../Components/store/reducer";
 const Transaction = () => {
   const route = useRouter();
 
   const tokens = useSelector((state) => state.data.token);
   const fetcheddata = useSelector((state) => state.data.fetcheddata);
-
+  const dispatch = useDispatch();
   const [token, settoken] = useState(tokens);
   useEffect(() => {
     if (!token) {
@@ -45,7 +46,26 @@ const Transaction = () => {
       message.info("Please Login");
     }
   }, [token]);
+  const getdata = async (localtoken) => {
+    try {
+      const response = await axios.get(
+        "https://budget-tracker-manoj.onrender.com/api/budget",
 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localtoken}`,
+          },
+        }
+      );
+      const latestfetcheddata = response.data.response;
+      console.log(latestfetcheddata);
+
+      dispatch(setFetcheddata(latestfetcheddata));
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  };
   const [data, setData] = useState([]);
   const [paidfor, setPaidfor] = useState("");
   const [paidby, setPaidby] = useState("");
@@ -64,7 +84,7 @@ const Transaction = () => {
 
   useEffect(() => {
     setData([...fetcheddata]);
-  }, []);
+  }, [fetcheddata]);
   const columnHelper = createMRTColumnHelper();
   const errorCheck = () => {
     if (paidfor.trim().length > 0) {
@@ -232,7 +252,7 @@ const Transaction = () => {
                       body: JSON.stringify({ id: _id }),
                     }
                   );
-                  getdata();
+                  getdata(token);
                   message.success("Data deleted");
                 } catch (e) {
                   console.log(e);
@@ -395,7 +415,7 @@ const Transaction = () => {
           }),
         }
       );
-      getdata();
+      getdata(token);
       setPaidby("");
       setPaidfor("");
       setPaidusing("");
@@ -446,7 +466,7 @@ const Transaction = () => {
           }),
         }
       );
-      getdata();
+      getdata(token);
       setPaidby("");
       setPaidfor("");
       setPaidusing("");

@@ -40,11 +40,10 @@ const getdata = async (localtoken) => {
 };
 const transactionfetcheddata = await getdata(localtoken);
 
-
 const initialState = {
   token: localtoken,
   fetcheddata: transactionfetcheddata,
-  profile:await getProfile(localtoken)
+  profile: await getProfile(localtoken),
 };
 
 const dataSlice = createSlice({
@@ -55,8 +54,11 @@ const dataSlice = createSlice({
       state.token = action.payload;
       localStorage.setItem("token", state.token);
     },
+    setFetcheddata(state, action) {
+      state.fetcheddata = action.payload;
+    },
   },
 });
 
-export const { setToken } = dataSlice.actions;
+export const { setToken, setFetcheddata } = dataSlice.actions;
 export default dataSlice.reducer;
